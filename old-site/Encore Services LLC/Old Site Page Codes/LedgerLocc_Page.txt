@@ -1,0 +1,1056 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;/&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;/&gt;
+  &lt;title&gt;Encore Services — LedgerLocc Highlights&lt;/title&gt;
+  &lt;style&gt;
+    /* =======================================
+       Encore Base Styles (Reusable Across Pages)
+       ======================================= */
+    /* --- Design tokens --- */
+    :root{
+      --navy:#0A1F44;
+      --red:#B22234;
+      --sky:#0f3d91;
+      --amber:#FFB000;
+      --white:#ffffff;
+      --ink:#101828;
+      --radius-card:16px;
+      --radius-btn:12px;
+      --shadow-card:0 18px 40px rgba(0,0,0,0.55);
+      --shadow-btn:0 8px 20px rgba(255,176,0,0.28);
+      --page-max-width:1140px;
+      --page-gutter:20px;
+      --section-padding-y:78px;
+      /* hero panel overlap — same pattern sitewide */
+      --hero-overlap:140px;
+    }
+    @media (max-width:960px){
+      :root{ --hero-overlap:100px; }
+    }
+    /* --- Base reset / typography --- */
+    html,body{
+      margin:0;
+      padding:0;
+    }
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:#ffffff;
+      background:linear-gradient(180deg, rgba(10,31,68,0.98), rgba(5,12,30,1));
+    }
+    *,
+    *::before,
+    *::after{
+      box-sizing:border-box;
+    }
+    a{
+      color:#e7eefc;
+      text-decoration:none;
+    }
+    a:hover{
+      text-decoration:underline;
+    }
+    a:focus-visible,
+    button:focus-visible{
+      outline:2px solid #ffd168;
+      outline-offset:2px;
+    }
+    /* --- Layout primitives --- */
+    .container{
+      max-width:var(--page-max-width);
+      margin:0 auto;
+      padding:0 var(--page-gutter);
+    }
+    .section{
+      padding:var(--section-padding-y) 0;
+    }
+    /* Custom top margin for the Overview section */
+    #overview{
+      margin-top: 200px;  /* adjust this value as needed */
+    }
+    /* --- Typographic helpers --- */
+    .eyebrow{
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:#9fb7ff;
+    }
+    .h1{
+      font-family:ui-serif, Georgia, &quot;Times New Roman&quot;, serif;
+      font-weight:800;
+      line-height:1.1;
+      font-size:clamp(32px,4.4vw,56px);
+      background:linear-gradient(92deg,#ffffff,#e9f1ff 35%,#ffd168 70%,#ffffff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .h2{
+      font-family:ui-serif, Georgia, &quot;Times New Roman&quot;, serif;
+      font-weight:800;
+      line-height:1.15;
+      font-size:clamp(26px,3.2vw,40px);
+      color:#ffffff;
+      margin-bottom:10px;
+    }
+    .muted{
+      color:#d3ddff;
+    }
+    /* --- Buttons --- */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:11px 16px;
+      border-radius:var(--radius-btn);
+      font-weight:800;
+      border:0;
+      cursor:pointer;
+      font-size:15px;
+      line-height:1.2;
+    }
+    .btn-primary{
+      background:linear-gradient(90deg,var(--amber),#ffd168);
+      color:#1a1200;
+      box-shadow:var(--shadow-btn);
+    }
+    .btn-ghost{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      color:#e7eefc;
+    }
+    /* --- Nav (desktop + mobile) --- */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:40;
+      background:linear-gradient(180deg,rgba(10,31,68,.9),rgba(10,31,68,.65));
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav__inner{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      padding:14px 20px;
+    }
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      font-weight:900;
+    }
+    .brand__logo{
+      height:80px;
+      width:auto;
+      display:block;
+    }
+    /* desktop nav links */
+    .nav__links{
+      margin-left:auto;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    /* mobile toggle */
+    .nav__toggle{
+      display:none;
+      margin-left:auto;
+      border:0;
+      background:transparent;
+      color:#ffffff;
+      padding:8px;
+      border-radius:8px;
+    }
+    .nav__burger,
+    .nav__burger::before,
+    .nav__burger::after{
+      display:block;
+      width:24px;
+      height:2px;
+      background:#ffffff;
+      content:&quot;&quot;;
+      transition:transform .25s ease, opacity .2s ease;
+      border-radius:1px;
+    }
+    .nav__burger::before{margin-top:-7px;}
+    .nav__burger::after{margin-top:5px;}
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+    /* mobile layout rules */
+    @media (max-width:960px){
+      .nav__toggle{display:inline-flex;}
+      .nav__links{
+        position:absolute;
+        left:0;
+        right:0;
+        top:100%;
+        display:none;
+        flex-direction:column;
+        gap:8px;
+        background:var(--navy);
+        padding:12px 20px;
+        border-bottom:1px solid rgba(255,255,255,.14);
+      }
+      .nav.open .nav__links{display:flex;}
+      .nav.open .nav__burger{
+        transform:rotate(45deg);
+      }
+      .nav.open .nav__burger::before{
+        transform:translateY(7px) rotate(90deg);
+      }
+      .nav.open .nav__burger::after{
+        opacity:0;
+      }
+    }
+    /* --- HERO (match homepage layout + overlap) --- */
+    .hero{
+      position:relative;
+      min-height:48vh;
+      display:grid;
+      place-items:center;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      /* overlap behavior — same pattern as home with panel hanging over */
+      padding:40px 0;
+    }
+    .hero {
+      margin-bottom: calc(var(--hero-overlap) * -1);
+      padding-bottom: 40px; /* or whatever you want, small number only */
+    }
+    @media (max-width:960px){
+      .hero{
+        min-height:56vh;
+        padding:32px 0;
+        padding-bottom:calc(var(--hero-overlap) + 32px);
+      }
+    }
+    .hero__bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      overflow:hidden;
+    }
+    .hero__bg video,
+    .hero__video{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:120vw;
+      height:120vh;
+      object-fit:cover;
+      transform:translate(-50%,-50%) scale(1.18);
+      pointer-events:none;
+      filter:brightness(.9) saturate(1.05);
+    }
+    .hero__content{
+      position:relative;
+      z-index:1;
+      width:100%;
+    }
+    .hero__panel{
+      max-width:780px;
+      margin:0 auto;
+      border-radius:18px;
+      padding:24px;
+      border:1px solid rgba(255,255,255,.24);
+      backdrop-filter:blur(6px);
+      /* slightly more opaque but same feel */
+      background:linear-gradient(135deg, rgba(10,31,68,.78), rgba(178,34,52,.52));
+      box-shadow:0 16px 40px rgba(0,0,0,.45);
+      position:relative;
+      /* this is what actually makes it overlap the next section */
+      transform:translateY(var(--hero-overlap));
+    }
+    .hero__btns{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    /* --- Grids --- */
+    .cards-3{
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    @media (max-width:960px){
+      .cards-3{grid-template-columns:repeat(2,1fr);}
+    }
+    @media (max-width:640px){
+      .cards-3{grid-template-columns:1fr;}
+    }
+    /* contact two-column */
+    .contact-grid{
+      display:grid;
+      gap:16px;
+      grid-template-columns:1.25fr .9fr;
+    }
+    @media (max-width:960px){
+      .contact-grid{grid-template-columns:1fr;}
+    }
+    /* --- Cards --- */
+    .card{
+      border-radius:var(--radius-card);
+      padding:20px 22px;
+      /* subtle patriotic gradient like hero */
+      background: linear-gradient(
+        135deg,
+        rgba(10,31,68,0.96) 0%,
+        rgba(178,34,52,0.55) 40%,
+        rgba(10,31,68,0.98) 100%
+      );
+      border:1px solid var(--amber);
+      box-shadow:
+        0 0 0 1px rgba(255,176,0,0.22),
+        var(--shadow-card);
+    }
+    /* --- Sponsors module (not used here, kept for consistency) --- */
+    .sponsors-grid{
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(4,1fr);
+    }
+    @media (max-width:960px){
+      .sponsors-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    @media (max-width:640px){
+      .sponsors-grid{grid-template-columns:1fr;}
+    }
+    .col{
+      height:360px;
+      overflow:hidden;
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.18);
+      position:relative;
+    }
+    .stack{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      padding:10px;
+    }
+    .sponsor-card{
+      width:100%;
+      aspect-ratio:1 / 1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.24);
+      border-radius:12px;
+      transition:transform .2s ease,box-shadow .2s ease;
+      padding:10px;
+    }
+    .sponsor-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 22px rgba(0,0,0,.28),
+                 0 0 0 4px rgba(255,255,255,.06) inset;
+    }
+    .sponsor-img{
+      max-width:70%;
+      max-height:70%;
+      object-fit:contain;
+      filter:saturate(0) brightness(.96) contrast(1.1);
+    }
+    /* continuous vertical scroll */
+    @keyframes scrollUp{
+      0%{transform:translateY(0);}
+      100%{transform:translateY(-50%);}
+    }
+    @keyframes scrollDown{
+      0%{transform:translateY(-50%);}
+      100%{transform:translateY(0);}
+    }
+    .anim-up{animation:scrollUp 22s linear infinite;}
+    .anim-down{animation:scrollDown 22s linear infinite;}
+    .col:hover .anim-up,
+    .col:hover .anim-down{
+      animation-play-state:paused;
+    }
+    /* --- Footer --- */
+    .footer{
+      padding:48px 0;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg,rgba(10,31,68,.7),rgba(10,31,68,.85));
+    }
+    .footer__grid{
+      display:grid;
+      gap:24px;
+      grid-template-columns:1.4fr .8fr;
+    }
+    @media (max-width:960px){
+      .footer__grid{grid-template-columns:1fr;}
+    }
+    /* =======================================
+       LEDGERLOCC HIGHLIGHTS PAGE-SPECIFIC STYLES
+       ======================================= */
+    .lead{
+      font-size:clamp(17px,2.1vw,20px);
+      line-height:1.7;
+      color:#f3f4ff;
+      margin-top:10px;
+    }
+    .capabilities-layout{
+      display:grid;
+      grid-template-columns:1.6fr 1fr;
+      gap:32px;
+      align-items:flex-start;
+    }
+    @media (max-width:960px){
+      .capabilities-layout{
+        grid-template-columns:1fr;
+      }
+    }
+    .capabilities-copy p{
+      margin:0 0 12px;
+      color:#e4e9ff;
+      font-size:15px;
+      line-height:1.7;
+    }
+    .pill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:16px 0 0;
+      padding:0;
+      list-style:none;
+    }
+    .pill{
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.16);
+      color:#e7eefc;
+      white-space:nowrap;
+    }
+    .stat-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px 18px;
+      margin-top:14px;
+    }
+    @media (max-width:480px){
+      .stat-grid{
+        grid-template-columns:1fr;
+      }
+    }
+    .stat-label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:#9fb7ff;
+      margin-bottom:2px;
+    }
+    .stat-value{
+      font-weight:700;
+      font-size:15px;
+      color:#ffffff;
+    }
+    .values-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+    @media (max-width:960px){
+      .values-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    }
+    @media (max-width:640px){
+      .values-grid{grid-template-columns:1fr;}
+    }
+    .value-title{
+      font-weight:700;
+      font-size:15px;
+      margin-bottom:6px;
+    }
+    .value-text{
+      font-size:14px;
+      color:#d3ddff;
+    }
+    .section-subtitle{
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:#9fb7ff;
+      margin-bottom:4px;
+    }
+    .leader-title{
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:#ffd168;
+      margin-bottom:4px;
+    }
+    .leader-name{
+      font-size:18px;
+      font-weight:800;
+      margin-bottom:6px;
+    }
+    .leader-meta{
+      font-size:13px;
+      color:#d3ddff;
+      margin-bottom:10px;
+    }
+    /* ========== CONTACT SECTION / NINJA FORMS STYLE (unchanged global) ========== */
+    .contact-section .contact-grid{
+      display:grid;
+      gap:32px;
+      grid-template-columns:1fr 1fr;
+      align-items:start;
+    }
+    @media (max-width:960px){
+      .contact-section .contact-grid{
+        grid-template-columns:1fr;
+      }
+    }
+    .contact-section .contact-card{
+      max-width:none;
+      justify-self:stretch;
+    }
+    .contact-section .nf-form-cont{
+      color:#e5edff;
+      font-family:inherit;
+    }
+    .contact-section .nf-field-label label,
+    .contact-section .nf-field .nf-before-field .nf-field-label label{
+      color:#ffffff;
+      font-weight:800;
+    }
+    .contact-section .nf-form-cont input[type=&quot;text&quot;],
+    .contact-section .nf-form-cont input[type=&quot;email&quot;],
+    .contact-section .nf-form-cont input[type=&quot;tel&quot;],
+    .contact-section .nf-form-cont input[type=&quot;url&quot;],
+    .contact-section .nf-form-cont input[type=&quot;number&quot;],
+    .contact-section .nf-form-cont input[type=&quot;date&quot;],
+    .contact-section .nf-form-cont select,
+    .contact-section .nf-form-cont textarea{
+      width:100%;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.18);
+      color:#e5edff;
+      border-radius:12px;
+      padding:12px 14px;
+      transition:
+        box-shadow .15s ease,
+        border-color .15s ease,
+        background .15s ease;
+    }
+    .contact-section .nf-form-cont ::placeholder{
+      color:#cdd8ff;
+      opacity:.85;
+    }
+    .contact-section .nf-form-cont input:focus,
+    .contact-section .nf-form-cont select:focus,
+    .contact-section .nf-form-cont textarea:focus{
+      outline:none;
+      border-color:#9fb7ff;
+      box-shadow:0 0 0 3px rgba(159,183,255,.35);
+      background:rgba(255,255,255,.09);
+    }
+    .contact-section .nf-form-cont input[type=&quot;checkbox&quot;],
+    .contact-section .nf-form-cont input[type=&quot;radio&quot;]{
+      accent-color:var(--amber);
+    }
+    .contact-section .nf-form-cont .nf-field input[type=&quot;submit&quot;],
+    .contact-section .nf-form-cont .nf-field input[type=&quot;button&quot;],
+    .contact-section .nf-form-cont .submit-wrap .ninja-forms-field{
+      background:linear-gradient(90deg, var(--amber), #FFD168);
+      color:#1a1200;
+      font-weight:800;
+      border:0;
+      border-radius:12px;
+      padding:12px 18px;
+      box-shadow:0 8px 20px rgba(255,176,0,.28);
+      cursor:pointer;
+    }
+    .contact-section .nf-form-cont input[type=&quot;submit&quot;]:hover{
+      filter:brightness(1.06);
+    }
+    .contact-section .nf-error input,
+    .contact-section .nf-error select,
+    .contact-section .nf-error textarea{
+      border-color:#ff6b6b !important;
+      box-shadow:0 0 0 3px rgba(255,107,107,.25) !important;
+    }
+    .contact-section .nf-error-msg,
+    .contact-section .ninja-forms-req-symbol{
+      color:#ffd1d1;
+    }
+    .contact-section .nf-response-msg{
+      background:rgba(34,197,94,.12);
+      border:1px solid rgba(34,197,94,.35);
+      color:#daf5e4;
+      border-radius:12px;
+      padding:12px 14px;
+    }
+    /* Make Ninja Forms &quot;Contact Me&quot; title match white headings */
+    .contact-section .nf-form-cont .nf-form-title,
+    .contact-section .nf-form-cont .nf-form-title h1,
+    .contact-section .nf-form-cont .nf-form-title h2,
+    .contact-section .nf-form-cont .nf-form-title h3 {
+      color:#ffffff !important;
+    }
+    .ledgerlocc-video-card{
+      /* card already has gold border + gradient from .card */
+      text-align:left;
+    }
+    .ledgerlocc-video-frame{
+      position:relative;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 12px 32px rgba(0,0,0,.45);
+    }
+    .ledgerlocc-video{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  font-weight:900;
+}
+/* tagline to the right of the logo */
+.brand__tagline{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#FFE29A;          /* gold accent – matches your existing highlight */
+  white-space:nowrap;     /* keeps it on one line on larger screens */
+  opacity:0.95;
+}
+/* optionally hide or shrink on small screens */
+@media (max-width: 600px){
+  .brand__tagline{
+    font-size:10px;
+    letter-spacing:.08em;
+  }
+}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- ========== GLOBAL HEADER / NAV (UNCHANGED EXCEPT LINK TEXT/HREF) ========== --&gt;
+  &lt;header class=&quot;nav&quot; role=&quot;banner&quot; aria-label=&quot;Primary Navigation&quot;&gt;
+    &lt;div class=&quot;container nav__inner&quot;&gt;
+      &lt;!-- Brand / Logo --&gt;
+      &lt;a class=&quot;brand&quot; href=&quot;/&quot;&gt;
+  &lt;span class=&quot;brand__flag&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+  &lt;img class=&quot;brand__logo&quot; src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/tempencorelogo.png&quot; alt=&quot;Encore Services logo&quot; loading=&quot;eager&quot; height=&quot;36&quot;&gt;
+  &lt;span class=&quot;brand__tagline&quot;&gt;Performance Determines Success&lt;/span&gt;
+&lt;/a&gt;
+      &lt;!-- Mobile burger button --&gt;
+      &lt;button class=&quot;nav__toggle&quot; aria-label=&quot;Open menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;site-menu&quot;&gt;
+        &lt;span class=&quot;nav__burger&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+        &lt;span class=&quot;sr-only&quot;&gt;Toggle menu&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;!-- Main nav links --&gt;
+      &lt;nav id=&quot;site-menu&quot; class=&quot;nav__links&quot; role=&quot;navigation&quot; aria-label=&quot;Site&quot;&gt;
+          &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
+        &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
+        &lt;a href=&quot;/capabilities&quot;&gt;Capabilities&lt;/a&gt;
+        &lt;a href=&quot;/ledgerlocc&quot;&gt;LedgerLocc&lt;/a&gt;
+        &lt;a class=&quot;btn btn-primary&quot; href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+  &lt;!-- HERO — LEDGERLOCC HIGHLIGHTS --&gt;
+  &lt;section class=&quot;hero&quot;&gt;
+    &lt;div class=&quot;hero__bg&quot;&gt;
+      &lt;video class=&quot;hero__video&quot; autoplay muted loop playsinline&gt;
+        &lt;source src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/ledgerloccdataweb.mp4&quot;&gt;
+        Your browser does not support the video tag.
+      &lt;/video&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;hero__content&quot;&gt;
+      &lt;div class=&quot;hero__panel container&quot;&gt;
+        &lt;div class=&quot;eyebrow&quot;&gt;A Glance at LedgerLocc&lt;/div&gt;
+        &lt;h1 class=&quot;h1&quot; style=&quot;margin-top:8px&quot;&gt;From Capture to Courtroom — Every Byte in Custody.&lt;/h1&gt;
+        &lt;p class=&quot;lead&quot;&gt;
+          LedgerLocc is a unified custody, collaboration, and intelligence platform that replaces today’s
+          patchwork of tools with a single Zero-Trust environment for chat, evidence capture, video, and
+          legal discovery — engineered for national-security-grade integrity.
+        &lt;/p&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;margin-top:10px;font-size:15px;max-width:70ch;&quot;&gt;
+          Every message, document, frame, and edit is cryptographically signed at creation and chained through
+          its lifecycle. LedgerLocc delivers verifiable integrity from field collection to courtroom presentation,
+          aligned with NIST SP 800-207 Zero Trust and FedRAMP High-ready architecture.
+        &lt;/p&gt;
+        &lt;div class=&quot;hero__btns&quot;&gt;
+          &lt;a href=&quot;#contact&quot; class=&quot;btn btn-primary&quot;&gt;Request Access to LedgerLocc&lt;/a&gt;
+          &lt;a href=&quot;#about-ledgerlocc&quot; class=&quot;btn btn-ghost&quot;&gt;About LedgerLocc&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- PLATFORM SNAPSHOT &amp; OBJECTIVES --&gt;
+  &lt;section id=&quot;overview&quot; class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container capabilities-layout&quot;&gt;
+      &lt;div class=&quot;capabilities-copy&quot;&gt;
+        &lt;h2 class=&quot;h2&quot;&gt;Unified Custody Platform&lt;/h2&gt;
+        &lt;p&gt;
+          LedgerLocc consolidates secure communications, evidence capture, collaboration, and
+          AI-assisted analysis into a &lt;strong&gt;single Zero-Trust domain&lt;/strong&gt;. Instead of juggling
+          Teams, Slack, Signal, Zoom, Webex, Dropbox, SharePoint, and Workstorm, agencies operate in one
+          custody-first environment designed for legal authenticity and mission agility.
+        &lt;/p&gt;
+        &lt;p&gt;
+          The platform’s &lt;strong&gt;Custody Intelligence Core&lt;/strong&gt; cryptographically signs events at
+          creation, chains them through their lifecycle, and anchors them into an immutable ledger.
+          This delivers court-ready provenance, predictable audit, and acquisition-grade observability.
+        &lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;Core objectives at a glance:&lt;/strong&gt;&lt;/p&gt;
+        &lt;ul class=&quot;muted&quot; style=&quot;margin:0 0 10px 18px;font-size:14px;&quot;&gt;
+          &lt;li&gt;Unify operations into one Zero-Trust domain for chat, files, video, and discovery.&lt;/li&gt;
+          &lt;li&gt;Automate chain-of-custody with ledger-verified audit and redaction (80–90% manual effort reduction by workflow).&lt;/li&gt;
+          &lt;li&gt;Run &lt;strong&gt;local, air-gapped AI&lt;/strong&gt; for redaction and anomaly detection with traceable model integrity.&lt;/li&gt;
+          &lt;li&gt;Modernize legal collaboration with case-centric workspaces and court-ready export bundles.&lt;/li&gt;
+          &lt;li&gt;Provide acquisition and leadership teams with built-in TCO and operations dashboards.&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;ul class=&quot;pill-list&quot;&gt;
+          &lt;li class=&quot;pill&quot;&gt;Zero-Trust Aligned (NIST 800-207)&lt;/li&gt;
+          &lt;li class=&quot;pill&quot;&gt;FedRAMP High-Ready Architecture&lt;/li&gt;
+          &lt;li class=&quot;pill&quot;&gt;CJIS Policy-Aligned (Agency CJA)&lt;/li&gt;
+          &lt;li class=&quot;pill&quot;&gt;E2E Custody Ledger&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;!-- RIGHT COLUMN: PLATFORM STATUS CARD --&gt;
+      &lt;aside class=&quot;card&quot;&gt;
+        &lt;div class=&quot;eyebrow&quot;&gt;LedgerLocc Snapshot&lt;/div&gt;
+        &lt;p class=&quot;lead&quot; style=&quot;font-size:15px;margin-top:10px;&quot;&gt;
+          High-level readiness and deployment profile for LedgerLocc in government and enterprise environments.
+        &lt;/p&gt;
+        &lt;div class=&quot;stat-grid&quot;&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;stat-label&quot;&gt;Status&lt;/div&gt;
+            &lt;div class=&quot;stat-value&quot;&gt;Acquisition-Ready&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;stat-label&quot;&gt;Zero-Trust&lt;/div&gt;
+            &lt;div class=&quot;stat-value&quot;&gt;NIST SP 800-207 Aligned&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;stat-label&quot;&gt;Architecture&lt;/div&gt;
+            &lt;div class=&quot;stat-value&quot;&gt;FedRAMP High-Ready&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;stat-label&quot;&gt;Compliance&lt;/div&gt;
+            &lt;div class=&quot;stat-value&quot;&gt;800-53 R5 · CJIS Policy&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;stat-label&quot;&gt;Release&lt;/div&gt;
+            &lt;div class=&quot;stat-value&quot;&gt;LedgerLocc v4.2 · Current&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;stat-label&quot;&gt;Deployment&lt;/div&gt;
+            &lt;div class=&quot;stat-value&quot;&gt;AWS GovCloud · Azure Gov · On-Prem&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;h3 class=&quot;section-subtitle&quot; style=&quot;margin-top:18px;&quot;&gt;Access to LedgerLocc.com&lt;/h3&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;font-size:13px;&quot;&gt;
+          The &lt;strong&gt;ledgerlocc.com&lt;/strong&gt; portal is &lt;strong&gt;passcode protected&lt;/strong&gt; and reserved for
+          qualified government and enterprise programs. To request access, submit a brief description of your
+          mission and environment using the contact section below. Our team will coordinate credentials and
+          any required pre-screening.
+        &lt;/p&gt;
+      &lt;/aside&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- LEDGERLOCC WALKTHROUGH VIDEO --&gt;
+  &lt;section id=&quot;about-ledgerlocc&quot; class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;div class=&quot;card ledgerlocc-video-card&quot; style=&quot;max-width:960px;margin:0 auto;&quot;&gt;
+        &lt;div class=&quot;section-subtitle&quot;&gt;From Capture to Courtroom&lt;/div&gt;
+        &lt;h2 class=&quot;h2&quot; style=&quot;margin-bottom:12px;&quot;&gt;See LedgerLocc in Action&lt;/h2&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;max-width:70ch;margin-bottom:18px;&quot;&gt;
+          A brief walkthrough of how LedgerLocc unifies custody, collaboration, and intelligence —
+          from secure capture to court-ready output.
+        &lt;/p&gt;
+        &lt;div class=&quot;ledgerlocc-video-frame&quot;&gt;
+          &lt;video
+            controls
+            playsinline
+            preload=&quot;metadata&quot;
+            class=&quot;ledgerlocc-video&quot;
+          &gt;
+            &lt;source src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/teaserLL2.mp4&quot;&gt;
+            Your browser does not support the video tag.
+          &lt;/video&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- CUSTODY INTELLIGENCE CORE --&gt;
+  &lt;section class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container&quot; style=&quot;max-width:900px;&quot;&gt;
+      &lt;h2 class=&quot;h2&quot;&gt;Custody Intelligence Core&lt;/h2&gt;
+      &lt;p class=&quot;muted&quot; style=&quot;max-width:70ch;margin-top:6px;&quot;&gt;
+        At the center of LedgerLocc is the Custody Intelligence Core — an AI-assisted, ledger-backed engine
+        that enforces provenance, automates redaction, and produces court-ready evidence packages.
+      &lt;/p&gt;
+      &lt;div class=&quot;card&quot; style=&quot;margin-top:18px;&quot;&gt;
+        &lt;div class=&quot;section-subtitle&quot;&gt;Mission-Adaptive Intelligence&lt;/div&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;font-size:13px;margin-top:6px;&quot;&gt;
+          Runs inside &lt;strong&gt;air-gapped secure enclaves&lt;/strong&gt; with signed models, datasets, and configs
+          so every inference can be reproduced and defended.
+        &lt;/p&gt;
+        &lt;ul class=&quot;muted&quot; style=&quot;font-size:13px;list-style:disc;padding-left:18px;margin-top:8px;&quot;&gt;
+          &lt;li&gt;&lt;strong&gt;Court-Ready Dossiers&lt;/strong&gt;: PDF/A-3 evidence bundles with hash manifests and per-edit trails.&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;Model Integrity Chain&lt;/strong&gt;: Model hash, dataset reference, enclave measurement, config, and timestamps all logged to the ledger.&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;Case Templating&lt;/strong&gt;: Turn complex investigations into reusable, standards-aligned templates for agencies, legal teams, and court handoffs.&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;div class=&quot;section-subtitle&quot; style=&quot;margin-top:16px;&quot;&gt;AIRS — Auto-Redaction&lt;/div&gt;
+        &lt;ul class=&quot;muted&quot; style=&quot;font-size:13px;list-style:disc;padding-left:18px;margin-top:8px;&quot;&gt;
+          &lt;li&gt;Detects faces (juveniles/agents), plates, badges, and other sensitive elements.&lt;/li&gt;
+          &lt;li&gt;Generates pixel-perfect derivatives, cryptographically linked to the original via ledger hash.&lt;/li&gt;
+          &lt;li&gt;Operates on-prem or in GovCloud — no external calls — with human-in-the-loop for admissibility.&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;div class=&quot;section-subtitle&quot; style=&quot;margin-top:16px;&quot;&gt;LedgerAI — Document Intelligence&lt;/div&gt;
+        &lt;ul class=&quot;muted&quot; style=&quot;font-size:13px;list-style:disc;padding-left:18px;margin-top:8px;&quot;&gt;
+          &lt;li&gt;Drafts incident reports, summaries, and briefs from case context.&lt;/li&gt;
+          &lt;li&gt;Suggests labels such as FOUO, CUI, and CJIS, with full prompt/model/version logging.&lt;/li&gt;
+          &lt;li&gt;All outputs require human review prior to finalization, with decisions recorded in the ledger.&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;div class=&quot;section-subtitle&quot; style=&quot;margin-top:16px;&quot;&gt;Austere Continuity Core&lt;/div&gt;
+        &lt;ul class=&quot;muted&quot; style=&quot;font-size:13px;list-style:disc;padding-left:18px;margin-top:8px;&quot;&gt;
+          &lt;li&gt;Peer-to-peer mesh (Wi-Fi Aware / BLE / NFC) with store-carry-forward routing.&lt;/li&gt;
+          &lt;li&gt;Edge Nodes preserve ledger continuity offline (up to 7 days) and auto-sync when reconnected.&lt;/li&gt;
+          &lt;li&gt;Designed for disaster, field, and tactical environments where infrastructure is limited or degraded.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- KEY CAPABILITY PILLARS --&gt;
+  &lt;section class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;h2 class=&quot;h2&quot;&gt;Key Capability Pillars&lt;/h2&gt;
+      &lt;p class=&quot;muted&quot; style=&quot;max-width:720px;margin-top:6px;&quot;&gt;
+        LedgerLocc combines custody, collaboration, and intelligence into a set of tightly integrated
+        pillars designed for sensitive government and high-risk enterprise missions.
+      &lt;/p&gt;
+      &lt;div class=&quot;values-grid&quot; style=&quot;margin-top:20px;&quot;&gt;
+        &lt;!-- Ledger &amp; Zero Trust --&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;Immutable Ledger &amp;amp; Zero Trust Gateway&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot; style=&quot;margin-bottom:8px;&quot;&gt;
+            Hot/Warm/Cold custody ledger with mTLS-enforced, policy-aware access.
+          &lt;/p&gt;
+          &lt;ul class=&quot;value-text&quot; style=&quot;list-style:disc;padding-left:18px;&quot;&gt;
+            &lt;li&gt;Rust/Go ledger core with SHA-3-256 Merkle chains.&lt;/li&gt;
+            &lt;li&gt;Envoy + OPA/Rego Zero-Trust Gateway with RBAC/ABAC.&lt;/li&gt;
+            &lt;li&gt;WORM object lock and legal hold for long-term retention.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;!-- Secure Video &amp; Legal Collab --&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;Secure Video, Voice &amp;amp; Legal Collaboration&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot; style=&quot;margin-bottom:8px;&quot;&gt;
+            LedgerMeet + LedgerDocs/LedgerComm for end-to-end custody of conversations and documents.
+          &lt;/p&gt;
+          &lt;ul class=&quot;value-text&quot; style=&quot;list-style:disc;padding-left:18px;&quot;&gt;
+            &lt;li&gt;WebRTC SFU with DTLS-SRTP and optional SFrame E2EE.&lt;/li&gt;
+            &lt;li&gt;Attested recording clients; SFU never sees plaintext.&lt;/li&gt;
+            &lt;li&gt;Commit-signed edits, comments, and discovery threads.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;!-- Governance &amp; AI Oversight --&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;Governance, Roles &amp;amp; AI Oversight&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot; style=&quot;margin-bottom:8px;&quot;&gt;
+            Explicit custody roles with AI ethics and model governance built-in.
+          &lt;/p&gt;
+          &lt;ul class=&quot;value-text&quot; style=&quot;list-style:disc;padding-left:18px;&quot;&gt;
+            &lt;li&gt;Custody Admin, Ops Supervisor, Field Agent, Reviewer/Prosecutor roles.&lt;/li&gt;
+            &lt;li&gt;AI Custodian and AI Ethics Reviewer with co-signed approvals.&lt;/li&gt;
+            &lt;li&gt;All actions immutably recorded in the ledger.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;!-- Federation &amp; Integration --&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;Federation, Integration &amp;amp; Imports&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot; style=&quot;margin-bottom:8px;&quot;&gt;
+            Connects to existing identity, comms, storage, and SIEM without sacrificing custody.
+          &lt;/p&gt;
+          &lt;ul class=&quot;value-text&quot; style=&quot;list-style:disc;padding-left:18px;&quot;&gt;
+            &lt;li&gt;SAML / OIDC / SCIM; SPIFFE/SPIRE identity mesh.&lt;/li&gt;
+            &lt;li&gt;Imports from Teams, Slack, Meet, and legacy storage into the ledger.&lt;/li&gt;
+            &lt;li&gt;Feeds Splunk, Sentinel, and Elastic via label-aware telemetry.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;!-- Ops Center &amp; TCO --&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;Ops Center &amp;amp; TCO Dashboards&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot; style=&quot;margin-bottom:8px;&quot;&gt;
+            Real-time operational and financial visibility for leadership and acquisition teams.
+          &lt;/p&gt;
+          &lt;ul class=&quot;value-text&quot; style=&quot;list-style:disc;padding-left:18px;&quot;&gt;
+            &lt;li&gt;Ledger timelines, integrity views, and case telemetry.&lt;/li&gt;
+            &lt;li&gt;Cloud cost feeds into per-tenant TCO dashboards.&lt;/li&gt;
+            &lt;li&gt;PII-safe logging and label-aware routing.&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;!-- Security &amp; Compliance --&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;Security, Compliance &amp;amp; ROI&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot; style=&quot;margin-bottom:8px;&quot;&gt;
+            Built to map directly to modern mandates and deliver measurable savings.
+          &lt;/p&gt;
+          &lt;ul class=&quot;value-text&quot; style=&quot;list-style:disc;padding-left:18px;&quot;&gt;
+            &lt;li&gt;NIST 800-53 R5, FedRAMP High-ready, CJIS policy alignment.&lt;/li&gt;
+            &lt;li&gt;OMB M-22-09 and EO 14110/14028-aligned controls and logging.&lt;/li&gt;
+            &lt;li&gt;90–98% reduction in custody verification time (pilot-validated ranges).&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- WHO LEDGERLOCC SERVES --&gt;
+ &lt;section class=&quot;section&quot;&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;h2 class=&quot;h2&quot;&gt;Who LedgerLocc Serves&lt;/h2&gt;
+    &lt;p class=&quot;muted&quot; style=&quot;max-width:720px;margin-top:6px;&quot;&gt;
+      LedgerLocc is designed for organizations where provenance, integrity, and accountability are non-negotiable.
+    &lt;/p&gt;
+    &lt;div class=&quot;cards-3&quot; style=&quot;margin-top:20px;&quot;&gt;
+      &lt;div class=&quot;card&quot;&gt;
+        &lt;div class=&quot;value-title&quot;&gt;Government &amp;amp; Public Sector Programs&lt;/div&gt;
+        &lt;p class=&quot;value-text&quot;&gt;
+          Agencies that need verifiable chain-of-custody for operational video, digital records,
+          and sensitive collaboration — from initial capture through executive and oversight review.
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;card&quot;&gt;
+        &lt;div class=&quot;value-title&quot;&gt;Critical Infrastructure &amp;amp; Regulated Industries&lt;/div&gt;
+        &lt;p class=&quot;value-text&quot;&gt;
+          Organizations in energy, healthcare, finance, and other regulated sectors that require
+          immutable records, auditable workflows, and defensible data-handling practices.
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;card&quot;&gt;
+        &lt;div class=&quot;value-title&quot;&gt;Courts, Legal &amp;amp; Enterprise Compliance&lt;/div&gt;
+        &lt;p class=&quot;value-text&quot;&gt;
+          Courts, oversight bodies, and enterprises that need court-ready dossiers, defensible AI assistance,
+          and a single custody-first collaboration surface for sensitive matters.
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+  &lt;!-- ACCESS &amp; PROCUREMENT CALLOUT --&gt;
+  &lt;section class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;div class=&quot;card&quot; style=&quot;max-width:880px;margin:0 auto;&quot;&gt;
+        &lt;div class=&quot;section-subtitle&quot;&gt;Request Access &amp;amp; Procurement Package&lt;/div&gt;
+        &lt;div class=&quot;leader-title&quot;&gt;LedgerLocc — Custody Intelligence Platform&lt;/div&gt;
+        &lt;div class=&quot;leader-name&quot;&gt;Access to LedgerLocc.com (Passcode Protected)&lt;/div&gt;
+        &lt;div class=&quot;leader-meta&quot;&gt;
+          The LedgerLocc portal and technical documentation are reserved for qualified government and
+          enterprise programs. Access is controlled and auditable by design.
+        &lt;/div&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt;
+          To request access to &lt;strong&gt;ledgerlocc.com&lt;/strong&gt;, or to review the full ATO and procurement package
+          (SSP draft, 800-53 R5 matrix, CONMON, IR plan, SBOM, and runbooks), please use the contact
+          section below or coordinate directly with your Encore representative.
+        &lt;/p&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;font-size:13px;margin-top:8px;&quot;&gt;
+          &lt;em&gt;
+            In your request, include your agency/organization, mission context, required environment
+            (AWS GovCloud, Azure Gov, or on-prem), and any timelines or pilots you are considering.
+          &lt;/em&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== GLOBAL CONTACT SECTION (UNCHANGED) ========== --&gt;
+  &lt;section id=&quot;contact&quot; class=&quot;section section--navy contact-section&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;div class=&quot;contact-grid&quot;&gt;
+        &lt;!-- Left: Contact details / copy --&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;eyebrow&quot;&gt;Contact&lt;/div&gt;
+          &lt;h2 class=&quot;h2&quot;&gt;Turn Ideas into Partnerships&lt;/h2&gt;
+          &lt;p class=&quot;muted&quot; style=&quot;max-width:65ch&quot;&gt;
+            Encore Services, LLC · 9500 Medical Center Drive, Suite 300, Largo, MD 20774 ·
+            202-460-8668 ·
+            &lt;a href=&quot;mailto:info@encoresvcsllc.com&quot; style=&quot;color:#ffe29a;text-decoration:underline&quot;&gt;
+              jwoodson@encoresvcsllc.com
+            &lt;/a&gt;
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;!-- Right: Form card (Ninja Forms) --&gt;
+        &lt;div class=&quot;card contact-card&quot;&gt;
+          &lt;!-- Replace with your actual Ninja Forms shortcode --&gt;
+          [ninja_form id=1]
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== GLOBAL FOOTER (UNCHANGED) ========== --&gt;
+  &lt;footer class=&quot;footer&quot; role=&quot;contentinfo&quot;&gt;
+    &lt;div class=&quot;container footer__grid&quot;&gt;
+      &lt;div&gt;
+        &lt;div class=&quot;brand&quot;&gt;
+          &lt;img
+            class=&quot;brand__logo&quot;
+            src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/tempencorelogo.png&quot;
+            alt=&quot;Encore Services logo&quot;
+            height=&quot;32&quot;
+            loading=&quot;lazy&quot;
+          &gt;
+        &lt;/div&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;margin-top:8px&quot;&gt;
+          Over a decade delivering innovative solutions with integrity, professionalism,
+          and a customer-first culture.
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;div class=&quot;muted&quot;&gt;
+          © 2025 Encore Services, LLC · SDVOSB · GSA Schedule 70 #47QTCA18D00BX
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+  &lt;script&gt;
+  /* Accessible mobile nav toggle */
+  (function(){
+    var nav    = document.querySelector('.nav');
+    var toggle = document.querySelector('.nav__toggle');
+    var menu   = document.getElementById('site-menu');
+    if (!nav || !toggle || !menu) return;
+    function setOpen(open){
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+    toggle.addEventListener('click', function(){
+      var open = toggle.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+    // Close when a link is clicked (mobile)
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setOpen(false); });
+    });
+    // Close on Escape
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape'){ setOpen(false); toggle.blur(); }
+    });
+  })();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

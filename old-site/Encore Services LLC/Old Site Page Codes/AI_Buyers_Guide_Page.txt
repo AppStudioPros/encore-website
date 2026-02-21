@@ -1,0 +1,652 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;/&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;/&gt;
+  &lt;title&gt;AI Buyer’s Guide — GOV Edition | Encore Services&lt;/title&gt;
+  &lt;style&gt;
+  /* =======================================
+     Encore Base Styles (Reusable Across Pages)
+     ======================================= */
+  /* --- Design tokens --- */
+  :root{
+    --navy:#0A1F44;
+    --red:#B22234;
+    --sky:#0f3d91;
+    --amber:#FFB000;
+    --white:#ffffff;
+    --ink:#101828;
+    --radius-card:16px;
+    --radius-btn:12px;
+    --shadow-card:0 18px 40px rgba(0,0,0,0.55);
+    --shadow-btn:0 8px 20px rgba(255,176,0,0.28);
+    --page-max-width:1140px;
+    --page-gutter:20px;
+    --section-padding-y:78px;
+  }
+  /* --- Base reset / typography --- */
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    color:#ffffff;
+    background:linear-gradient(180deg, rgba(10,31,68,0.98), rgba(5,12,30,1));
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  a{ color:#e7eefc; text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  a:focus-visible,
+  button:focus-visible{
+    outline:2px solid #ffd168;
+    outline-offset:2px;
+  }
+  /* --- Layout primitives --- */
+  .container{
+    max-width:var(--page-max-width);
+    margin:0 auto;
+    padding:0 var(--page-gutter);
+  }
+  .section{ padding:var(--section-padding-y) 0; }
+  /* --- Typographic helpers --- */
+  .eyebrow{
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:#9fb7ff;
+  }
+  .h1{
+    font-family:ui-serif, Georgia, &quot;Times New Roman&quot;, serif;
+    font-weight:800;
+    line-height:1.1;
+    font-size:clamp(32px,4.4vw,56px);
+    background:linear-gradient(92deg,#ffffff,#e9f1ff 35%,#ffd168 70%,#ffffff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .h2{
+    font-family:ui-serif, Georgia, &quot;Times New Roman&quot;, serif;
+    font-weight:800;
+    line-height:1.15;
+    font-size:clamp(26px,3.2vw,40px);
+    color:#ffffff;
+    margin-bottom:10px;
+  }
+  .muted{ color:#d3ddff; }
+  /* --- Buttons --- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:11px 16px;
+    border-radius:var(--radius-btn);
+    font-weight:800;
+    border:0;
+    cursor:pointer;
+    font-size:15px;
+    line-height:1.2;
+  }
+  .btn-primary{
+    background:linear-gradient(90deg,var(--amber),#ffd168);
+    color:#1a1200;
+    box-shadow:var(--shadow-btn);
+  }
+  .btn-ghost{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    color:#e7eefc;
+  }
+  /* --- Nav (desktop + mobile) --- */
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:40;
+    background:linear-gradient(180deg,rgba(10,31,68,.9),rgba(10,31,68,.65));
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .nav__inner{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:14px 20px;
+  }
+  .brand{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    font-weight:900;
+  }
+  .brand__logo{ height:80px; width:auto; display:block; }
+  /* tagline to the right of the logo */
+  .brand__tagline{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#FFE29A;
+    white-space:nowrap;
+    opacity:0.95;
+  }
+  @media (max-width: 600px){
+    .brand__tagline{ font-size:10px; letter-spacing:.08em; }
+  }
+  /* desktop nav links */
+  .nav__links{
+    margin-left:auto;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  /* mobile toggle */
+  .nav__toggle{
+    display:none;
+    margin-left:auto;
+    border:0;
+    background:transparent;
+    color:#ffffff;
+    padding:8px;
+    border-radius:8px;
+  }
+  .nav__burger,
+  .nav__burger::before,
+  .nav__burger::after{
+    display:block;
+    width:24px;
+    height:2px;
+    background:#ffffff;
+    content:&quot;&quot;;
+    transition:transform .25s ease, opacity .2s ease;
+    border-radius:1px;
+  }
+  .nav__burger::before{margin-top:-7px;}
+  .nav__burger::after{margin-top:5px;}
+  .sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+  }
+  /* mobile layout rules */
+  @media (max-width:960px){
+    .nav__toggle{display:inline-flex;}
+    .nav__links{
+      position:absolute;
+      left:0;
+      right:0;
+      top:100%;
+      display:none;
+      flex-direction:column;
+      gap:8px;
+      background:var(--navy);
+      padding:12px 20px;
+      border-bottom:1px solid rgba(255,255,255,.14);
+    }
+    .nav.open .nav__links{display:flex;}
+    .nav.open .nav__burger{ transform:rotate(45deg); }
+    .nav.open .nav__burger::before{ transform:translateY(7px) rotate(90deg); }
+    .nav.open .nav__burger::after{ opacity:0; }
+  }
+  /* --- Hero --- */
+  .hero{
+    position:relative;
+    min-height:48vh;
+    display:grid;
+    place-items:center;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    padding:10px 0 200px;
+  }
+  @media (max-width:960px){
+    .hero{ min-height:56vh; padding:10px 0 20px; }
+  }
+  .hero__bg{ position:absolute; inset:0; z-index:0; overflow:hidden; }
+  .hero__bg video,
+  .hero__video{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:120vw;
+    height:120vh;
+    object-fit:cover;
+    transform:translate(-50%,-50%) scale(1.18);
+    pointer-events:none;
+    filter:brightness(.9) saturate(1.05);
+  }
+  .hero__content{ position:relative; z-index:1; width:100%; }
+  .hero__panel{
+    max-width:820px;
+    margin:0 auto;
+    border-radius:18px;
+    padding:24px;
+    border:1px solid rgba(255,255,255,.24);
+    backdrop-filter:blur(6px);
+    background:linear-gradient(135deg, rgba(10,31,68,.78), rgba(15,61,145,.7));
+    box-shadow:0 16px 40px rgba(0,0,0,.45);
+  }
+  .hero__btns{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:16px;
+  }
+  /* --- Cards --- */
+  .card{
+    border-radius:var(--radius-card);
+    padding:20px 22px;
+    background:linear-gradient(135deg, rgba(10,31,68,0.96), rgba(178,34,52,0.55), rgba(10,31,68,0.98));
+    border:1px solid var(--amber);
+    box-shadow:0 0 0 1px rgba(255,176,0,0.22), var(--shadow-card);
+  }
+  /* --- Footer --- */
+  .footer{
+    padding:48px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+    background:linear-gradient(180deg,rgba(10,31,68,.7),rgba(10,31,68,.85));
+  }
+  .footer__grid{
+    display:grid;
+    gap:24px;
+    grid-template-columns:1.4fr .8fr;
+  }
+  @media (max-width:960px){
+    .footer__grid{grid-template-columns:1fr;}
+  }
+  /* --- Reduced motion --- */
+  @media (prefers-reduced-motion: reduce){
+    .hero__bg{ background:radial-gradient(circle at top left, rgba(255,255,255,.08), transparent 55%); }
+    .hero__bg video{ display:none; }
+  }
+  /* =======================================
+     BUYER'S GUIDE PAGE-SPECIFIC STYLES
+     ======================================= */
+  .lead{
+    font-size:clamp(17px,2.1vw,20px);
+    line-height:1.7;
+    color:#f3f4ff;
+    margin-top:10px;
+  }
+  .page-intro{ max-width:900px; }
+  .page-intro p{ font-size:15px; line-height:1.85; color:#e4e9ff; }
+  .highlight{
+    border-left:3px solid var(--amber);
+    padding-left:16px;
+    margin-top:14px;
+    font-size:14px;
+    color:#f7f1d0;
+  }
+  .split{
+    display:grid;
+    grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+    gap:28px;
+    align-items:flex-start;
+  }
+  @media (max-width:960px){ .split{ grid-template-columns:1fr; } }
+  .copy p{ margin:0 0 12px; font-size:15px; line-height:1.85; color:#e4e9ff; }
+  .label{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    color:#9fb7ff;
+    margin-bottom:4px;
+  }
+  .divider{
+    height:1px;
+    background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.4),rgba(255,255,255,.04));
+    margin:32px 0 12px;
+  }
+  .value-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:16px;
+    margin-top:18px;
+  }
+  @media (max-width:960px){ .value-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:640px){ .value-grid{ grid-template-columns:1fr; } }
+  .value-item{
+    background:rgba(10,31,68,.9);
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.18);
+    padding:16px 18px;
+    box-shadow:0 14px 32px rgba(0,0,0,.55);
+    font-size:14px;
+    color:#dde6ff;
+  }
+  .value-item strong{ color:#ffe29a; }
+  .samples{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+    margin-top:16px;
+  }
+  @media (max-width:800px){ .samples{ grid-template-columns:1fr; } }
+  .sample-q{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:14px;
+    padding:16px 16px;
+    box-shadow:0 14px 32px rgba(0,0,0,.55);
+  }
+  .sample-q .k{
+    display:inline-block;
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:#9fb7ff;
+    margin-bottom:6px;
+  }
+  .sample-q p{ margin:0; color:#eaf0ff; line-height:1.7; font-size:14px; }
+  .cta-inline{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:14px;
+  }
+  .fineprint{
+    font-size:13px;
+    color:#d3ddff;
+    line-height:1.75;
+  }
+  /* ========== CONTACT SECTION / NINJA FORMS STYLE (kept) ========== */
+  .contact-section .contact-grid{
+    display:grid;
+    gap:32px;
+    grid-template-columns:1fr;
+    align-items:start;
+  }
+  .contact-section .contact-card{ max-width:none; justify-self:stretch; }
+  .contact-section .nf-form-cont{ color:#e5edff; font-family:inherit; }
+  .contact-section .nf-field-label label,
+  .contact-section .nf-field .nf-before-field .nf-field-label label{
+    color:#ffffff;
+    font-weight:800;
+  }
+  .contact-section .nf-form-cont input[type=&quot;text&quot;],
+  .contact-section .nf-form-cont input[type=&quot;email&quot;],
+  .contact-section .nf-form-cont input[type=&quot;tel&quot;],
+  .contact-section .nf-form-cont input[type=&quot;url&quot;],
+  .contact-section .nf-form-cont input[type=&quot;number&quot;],
+  .contact-section .nf-form-cont input[type=&quot;date&quot;],
+  .contact-section .nf-form-cont select,
+  .contact-section .nf-form-cont textarea{
+    width:100%;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.18);
+    color:#e5edff;
+    border-radius:12px;
+    padding:12px 14px;
+    transition: box-shadow .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .contact-section .nf-form-cont ::placeholder{ color:#cdd8ff; opacity:.85; }
+  .contact-section .nf-form-cont input:focus,
+  .contact-section .nf-form-cont select:focus,
+  .contact-section .nf-form-cont textarea:focus{
+    outline:none;
+    border-color:#9fb7ff;
+    box-shadow:0 0 0 3px rgba(159,183,255,.35);
+    background:rgba(255,255,255,.09);
+  }
+  .contact-section .nf-form-cont input[type=&quot;checkbox&quot;],
+  .contact-section .nf-form-cont input[type=&quot;radio&quot;]{ accent-color:var(--amber); }
+  .contact-section .nf-form-cont .nf-field input[type=&quot;submit&quot;],
+  .contact-section .nf-form-cont .nf-field input[type=&quot;button&quot;],
+  .contact-section .nf-form-cont .submit-wrap .ninja-forms-field{
+    background:linear-gradient(90deg, var(--amber), #FFD168);
+    color:#1a1200;
+    font-weight:800;
+    border:0;
+    border-radius:12px;
+    padding:12px 18px;
+    box-shadow:0 8px 20px rgba(255,176,0,.28);
+    cursor:pointer;
+  }
+  .contact-section .nf-form-cont input[type=&quot;submit&quot;]:hover{ filter:brightness(1.06); }
+  .contact-section .nf-error input,
+  .contact-section .nf-error select,
+  .contact-section .nf-error textarea{
+    border-color:#ff6b6b !important;
+    box-shadow:0 0 0 3px rgba(255,107,107,.25) !important;
+  }
+  .contact-section .nf-error-msg,
+  .contact-section .ninja-forms-req-symbol{ color:#ffd1d1; }
+  .contact-section .nf-response-msg{
+    background:rgba(34,197,94,.12);
+    border:1px solid rgba(34,197,94,.35);
+    color:#daf5e4;
+    border-radius:12px;
+    padding:12px 14px;
+  }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- ========== GLOBAL HEADER / NAV (unchanged) ========== --&gt;
+  &lt;header class=&quot;nav&quot; role=&quot;banner&quot; aria-label=&quot;Primary Navigation&quot;&gt;
+    &lt;div class=&quot;container nav__inner&quot;&gt;
+      &lt;a class=&quot;brand&quot; href=&quot;/&quot;&gt;
+        &lt;span class=&quot;brand__flag&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+        &lt;img class=&quot;brand__logo&quot; src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/tempencorelogo.png&quot; alt=&quot;Encore Services logo&quot; loading=&quot;eager&quot; height=&quot;36&quot;&gt;
+        &lt;span class=&quot;brand__tagline&quot;&gt;Performance Determines Success&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;button class=&quot;nav__toggle&quot; aria-label=&quot;Open menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;site-menu&quot;&gt;
+        &lt;span class=&quot;nav__burger&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+        &lt;span class=&quot;sr-only&quot;&gt;Toggle menu&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;nav id=&quot;site-menu&quot; class=&quot;nav__links&quot; role=&quot;navigation&quot; aria-label=&quot;Site&quot;&gt;
+        &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
+        &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
+        &lt;a href=&quot;/capabilities&quot;&gt;Capabilities&lt;/a&gt;
+        &lt;a href=&quot;/ai-guide&quot;&gt;AI Guide&lt;/a&gt;
+        &lt;a href=&quot;/programs&quot;&gt;Programs&lt;/a&gt;
+        &lt;a class=&quot;btn btn-primary&quot; href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+  &lt;!-- ========== HERO (updated video + CTAs) ========== --&gt;
+  &lt;section class=&quot;hero&quot;&gt;
+    &lt;div class=&quot;hero__bg&quot;&gt;
+      &lt;video class=&quot;hero__video&quot; autoplay muted loop playsinline&gt;
+        &lt;source src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/12/digital-technology-background-2025-12-09-04-56-58-utc.mp4&quot; type=&quot;video/mp4&quot;&gt;
+        Your browser does not support the video tag.
+      &lt;/video&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;hero__content&quot;&gt;
+      &lt;div class=&quot;hero__panel container&quot;&gt;
+        &lt;div class=&quot;eyebrow&quot;&gt;AI Buyer’s Guide — GOV Edition&lt;/div&gt;
+        &lt;h1 class=&quot;h1&quot; style=&quot;margin-top:8px&quot;&gt;A plain-English reality check for high-stakes AI.&lt;/h1&gt;
+        &lt;p class=&quot;lead&quot;&gt;
+          Most AI pages try to sell you something. This one is here to help you &lt;strong&gt;not get sold&lt;/strong&gt; —
+          because when AI is used in government, the stakes aren’t “cool features.”
+          The stakes are &lt;strong&gt;people’s lives, rights, benefits, safety, investigations, and public trust.&lt;/strong&gt;
+        &lt;/p&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;margin-top:10px;font-size:15px;max-width:72ch;&quot;&gt;
+          Download the meeting-ready PDF you can print and take into vendor discussions.
+        &lt;/p&gt;
+        &lt;div class=&quot;hero__btns&quot;&gt;
+          &lt;a class=&quot;btn btn-primary&quot; href=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/12/Encore_AI_Buyers_Guide_GOV_Edition_EncoreServices_Clean_Tight.pdf&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Download the PDF&lt;/a&gt;
+          &lt;a class=&quot;btn btn-ghost&quot; href=&quot;#why&quot;&gt;Why We Published This&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== WHY WE PUBLISHED THIS ========== --&gt;
+  &lt;section id=&quot;why&quot; class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container page-intro&quot;&gt;
+      &lt;h2 class=&quot;h2&quot;&gt;Why Encore would publish this (even though it makes our job harder)&lt;/h2&gt;
+      &lt;p&gt;
+        Let’s be honest: Encore isn’t going to win every contract — and we don’t want a world where the “winner” is whoever can market the hardest,
+        hide the most, or rely on buyer confusion. That’s how under-tested systems get deployed… and how the public pays for it later.
+      &lt;/p&gt;
+      &lt;div class=&quot;highlight&quot;&gt;
+        &lt;strong&gt;Our end game:&lt;/strong&gt; raise the standard of AI in government.
+        When every vendor has to show proof, explain risk, and build real safeguards, missions win — regardless of who holds the contract.
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== OUR VIEW / CORE VALUE ========== --&gt;
+  &lt;section class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container split&quot;&gt;
+      &lt;div class=&quot;copy&quot;&gt;
+        &lt;div class=&quot;label&quot;&gt;Our View&lt;/div&gt;
+        &lt;h2 class=&quot;h2&quot;&gt;Competition is healthy. Hype is not.&lt;/h2&gt;
+        &lt;p&gt;
+          Competition keeps companies sharp. It forces everyone to build better systems next year than they built this year.
+          But “AI” has become a marketing word — and in government, that isn’t just annoying. It’s dangerous.
+        &lt;/p&gt;
+        &lt;p&gt;
+          If a vendor needs your confusion to close a deal, that vendor is a risk.
+          If they can’t explain the system simply, they shouldn’t deploy it in missions that carry real consequences.
+        &lt;/p&gt;
+        &lt;p&gt;
+          Educating buyers upfront shrinks our playing field and holds us to a higher bar, too. We’re fine with that.
+          We don’t avoid hard work — we chase it. Tough questions, lessons learned, and accountability are how real systems get built.
+        &lt;/p&gt;
+        &lt;div class=&quot;divider&quot;&gt;&lt;/div&gt;
+        &lt;p class=&quot;fineprint&quot;&gt;
+          We don’t need to be the biggest. We do want to be known as one of the most honest, transparent, and hard-working companies in this space —
+          not because we say “trust us,” but because we’ve earned it.
+        &lt;/p&gt;
+        &lt;div class=&quot;cta-inline&quot;&gt;
+          &lt;a class=&quot;btn btn-primary&quot; href=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/12/Encore_AI_Buyers_Guide_GOV_Edition_EncoreServices_Clean_Tight.pdf&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Download the PDF&lt;/a&gt;
+          &lt;a class=&quot;btn btn-ghost&quot; href=&quot;#sample&quot;&gt;See a sample&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;aside class=&quot;card&quot;&gt;
+        &lt;div class=&quot;label&quot;&gt;Why this matters&lt;/div&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;line-height:1.7;&quot;&gt;
+          When AI is treated like truth, errors scale fast and accountability gets blurry.
+          The goal of this guide is simple: help teams demand proof, require controls, and avoid buying “AI-shaped risk.”
+        &lt;/p&gt;
+        &lt;ul class=&quot;muted&quot; style=&quot;font-size:13px;line-height:1.7;list-style:disc;padding-left:18px;margin:10px 0 0;&quot;&gt;
+          &lt;li&gt;Separate demos from reality&lt;/li&gt;
+          &lt;li&gt;Get evidence, not buzzwords&lt;/li&gt;
+          &lt;li&gt;Require auditability and shutoff controls&lt;/li&gt;
+          &lt;li&gt;Deploy safely before scaling&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/aside&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== WHAT YOU GET IN THE PDF ========== --&gt;
+  &lt;section class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container&quot; style=&quot;max-width:980px;&quot;&gt;
+      &lt;div class=&quot;label&quot;&gt;Inside the PDF&lt;/div&gt;
+      &lt;h2 class=&quot;h2&quot;&gt;A field guide you can bring into a meeting&lt;/h2&gt;
+      &lt;p class=&quot;muted&quot; style=&quot;max-width:78ch;&quot;&gt;
+        This is not a textbook. It’s a meeting-ready guide written for smart, non-technical teams.
+        It helps you ask better questions, spot risk quickly, and require proof before you spend.
+      &lt;/p&gt;
+      &lt;div class=&quot;value-grid&quot;&gt;
+        &lt;div class=&quot;value-item&quot;&gt;&lt;strong&gt;The 3 types of “AI”&lt;/strong&gt;&lt;br/&gt;So vendors can’t hide behind one vague word.&lt;/div&gt;
+        &lt;div class=&quot;value-item&quot;&gt;&lt;strong&gt;Deliverables to require&lt;/strong&gt;&lt;br/&gt;Data flow, testing results, controls, and security basics.&lt;/div&gt;
+        &lt;div class=&quot;value-item&quot;&gt;&lt;strong&gt;Stoplight use-case chart&lt;/strong&gt;&lt;br/&gt;Green / Yellow / Red guidance for safer decisions.&lt;/div&gt;
+        &lt;div class=&quot;value-item&quot;&gt;&lt;strong&gt;“Learning over time” reality check&lt;/strong&gt;&lt;br/&gt;What must be true before self-updating AI is acceptable.&lt;/div&gt;
+        &lt;div class=&quot;value-item&quot;&gt;&lt;strong&gt;Pilot plan that doesn’t waste money&lt;/strong&gt;&lt;br/&gt;Test → shadow mode → limited pilot → scale only with proof.&lt;/div&gt;
+        &lt;div class=&quot;value-item&quot;&gt;&lt;strong&gt;Pushback scripts&lt;/strong&gt;&lt;br/&gt;Simple lines you can use when vendors dodge or oversell.&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;cta-inline&quot; style=&quot;margin-top:18px;&quot;&gt;
+        &lt;a class=&quot;btn btn-primary&quot; href=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/12/Encore_AI_Buyers_Guide_GOV_Edition_EncoreServices_Clean_Tight.pdf&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Download the PDF&lt;/a&gt;
+        &lt;a class=&quot;btn btn-ghost&quot; href=&quot;#contact&quot;&gt;Contact Encore&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== SMALL SAMPLE (NOT FULL TOP 5) ========== --&gt;
+  &lt;section id=&quot;sample&quot; class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container&quot; style=&quot;max-width:980px;&quot;&gt;
+      &lt;div class=&quot;label&quot;&gt;Two examples (teaser)&lt;/div&gt;
+      &lt;h2 class=&quot;h2&quot;&gt;The PDF includes a full set of questions — here are two samples&lt;/h2&gt;
+      &lt;p class=&quot;muted&quot; style=&quot;max-width:78ch;&quot;&gt;
+        We don’t publish the full list here because the PDF is designed to be printed and used in meetings.
+        But this is the flavor: plain language that forces clarity.
+      &lt;/p&gt;
+      &lt;div class=&quot;samples&quot;&gt;
+        &lt;div class=&quot;sample-q&quot;&gt;
+          &lt;span class=&quot;k&quot;&gt;Sample question&lt;/span&gt;
+          &lt;p&gt;&lt;strong&gt;“Can you show us the one-page diagram of where our data goes — what you store, who can access it, and how deletion works (including logs)?”&lt;/strong&gt;&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;sample-q&quot;&gt;
+          &lt;span class=&quot;k&quot;&gt;Sample question&lt;/span&gt;
+          &lt;p&gt;&lt;strong&gt;“When the system is wrong, what happens — who catches it, what gets logged, and how do we shut it off?”&lt;/strong&gt;&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;highlight&quot; style=&quot;margin-top:16px;&quot;&gt;
+        If a vendor can’t answer questions like these clearly, you’re not looking at a product — you’re looking at a risk.
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== GLOBAL CONTACT SECTION (CTA) (kept structure) ========== --&gt;
+  &lt;section id=&quot;contact&quot; class=&quot;section section--navy contact-section&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;div class=&quot;contact-grid&quot;&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;eyebrow&quot;&gt;Contact&lt;/div&gt;
+          &lt;h2 class=&quot;h2&quot;&gt;Talk to a Team That Welcomes Hard Questions&lt;/h2&gt;
+          &lt;p class=&quot;muted&quot; style=&quot;max-width:65ch&quot;&gt;
+            Encore Services, LLC · 9500 Medical Center Drive, Suite 300, Largo, MD 20774 ·
+            202-460-8668 ·
+            &lt;a href=&quot;mailto:jwoodson@encoresvcsllc.com&quot; style=&quot;color:#ffe29a;text-decoration:underline&quot;&gt;jwoodson@encoresvcsllc.com&lt;/a&gt;
+          &lt;/p&gt;
+          &lt;p class=&quot;muted&quot; style=&quot;max-width:65ch;font-size:14px;&quot;&gt;
+            Whether you work with us or not, we’re happy to help your team think more clearly about what AI should
+            and shouldn’t be doing in your mission.
+          &lt;/p&gt;
+          &lt;div class=&quot;cta-inline&quot;&gt;
+            &lt;a class=&quot;btn btn-primary&quot; href=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/12/Encore_AI_Buyers_Guide_GOV_Edition_EncoreServices_Clean_Tight.pdf&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Download the PDF&lt;/a&gt;
+            &lt;a class=&quot;btn btn-ghost&quot; href=&quot;#why&quot;&gt;Back to top&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;card contact-card&quot;&gt;
+          [ninja_form id=1]
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== GLOBAL FOOTER (unchanged) ========== --&gt;
+  &lt;footer class=&quot;footer&quot; role=&quot;contentinfo&quot;&gt;
+    &lt;div class=&quot;container footer__grid&quot;&gt;
+      &lt;div&gt;
+        &lt;div class=&quot;brand&quot;&gt;
+          &lt;img class=&quot;brand__logo&quot; src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/tempencorelogo.png&quot; alt=&quot;Encore Services logo&quot; height=&quot;32&quot; loading=&quot;lazy&quot;&gt;
+        &lt;/div&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;margin-top:8px&quot;&gt;
+          Over a decade delivering innovative solutions with integrity, professionalism,
+          and a customer-first culture.
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;div class=&quot;muted&quot;&gt;
+          © 2025 Encore Services, LLC · SDVOSB · GSA Schedule 70 #47QTCA18D00BX
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+  &lt;script&gt;
+  /* Accessible mobile nav toggle */
+  (function(){
+    var nav    = document.querySelector('.nav');
+    var toggle = document.querySelector('.nav__toggle');
+    var menu   = document.getElementById('site-menu');
+    if (!nav || !toggle || !menu) return;
+    function setOpen(open){
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+    toggle.addEventListener('click', function(){
+      var open = toggle.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+    // Close when a link is clicked (mobile)
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setOpen(false); });
+    });
+    // Close on Escape
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape'){ setOpen(false); toggle.blur(); }
+    });
+  })();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

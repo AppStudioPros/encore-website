@@ -1,0 +1,606 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;/&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;/&gt;
+  &lt;title&gt;Vault Access — Secure AI Mission Vault — Encore Services&lt;/title&gt;
+  &lt;style&gt;
+  /* =======================================
+     Encore Base Styles (Reusable Across Pages)
+     ======================================= */
+  /* --- Design tokens --- */
+  :root{
+    --navy:#0A1F44;
+    --red:#B22234;
+    --sky:#0f3d91;
+    --amber:#FFB000;
+    --white:#ffffff;
+    --ink:#101828;
+    --radius-card:16px;
+    --radius-btn:12px;
+    --shadow-card:0 18px 40px rgba(0,0,0,0.55);
+    --shadow-btn:0 8px 20px rgba(255,176,0,0.28);
+    --page-max-width:1140px;
+    --page-gutter:20px;
+    --section-padding-y:78px;
+  }
+  /* --- Base reset / typography --- */
+  html,body{
+    margin:0;
+    padding:0;
+  }
+  body{
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    color:#ffffff;
+    background:linear-gradient(180deg, rgba(10,31,68,0.98), rgba(5,12,30,1));
+  }
+  *,
+  *::before,
+  *::after{
+    box-sizing:border-box;
+  }
+  a{
+    color:#e7eefc;
+    text-decoration:none;
+  }
+  a:hover{
+    text-decoration:underline;
+  }
+  a:focus-visible,
+  button:focus-visible{
+    outline:2px solid #ffd168;
+    outline-offset:2px;
+  }
+  /* --- Layout primitives --- */
+  .container{
+    max-width:var(--page-max-width);
+    margin:0 auto;
+    padding:0 var(--page-gutter);
+  }
+  .section{
+    padding:var(--section-padding-y) 0;
+  }
+  /* --- Typographic helpers --- */
+  .eyebrow{
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:#9fb7ff;
+  }
+  .h1{
+    font-family:ui-serif, Georgia, &quot;Times New Roman&quot;, serif;
+    font-weight:800;
+    line-height:1.1;
+    font-size:clamp(32px,4.4vw,56px);
+    background:linear-gradient(92deg,#ffffff,#e9f1ff 35%,#ffd168 70%,#ffffff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .h2{
+    font-family:ui-serif, Georgia, &quot;Times New Roman&quot;, serif;
+    font-weight:800;
+    line-height:1.15;
+    font-size:clamp(26px,3.2vw,40px);
+    color:#ffffff;
+    margin-bottom:10px;
+  }
+  .muted{
+    color:#d3ddff;
+  }
+  .lead{
+    font-size:clamp(17px,2.1vw,20px);
+    line-height:1.7;
+    color:#f3f4ff;
+    margin-top:10px;
+  }
+  /* --- Buttons --- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:11px 16px;
+    border-radius:var(--radius-btn);
+    font-weight:800;
+    border:0;
+    cursor:pointer;
+    font-size:15px;
+    line-height:1.2;
+  }
+  .btn-primary{
+    background:linear-gradient(90deg,var(--amber),#ffd168);
+    color:#1a1200;
+    box-shadow:var(--shadow-btn);
+  }
+  .btn-ghost{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    color:#e7eefc;
+  }
+  /* --- Nav (desktop + mobile) --- */
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:40;
+    background:linear-gradient(180deg,rgba(10,31,68,.9),rgba(10,31,68,.65));
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .nav__inner{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:14px 20px;
+  }
+  .brand{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    font-weight:900;
+  }
+  .brand__logo{
+    height:80px;
+    width:auto;
+    display:block;
+  }
+  .brand__tagline{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#FFE29A;
+    white-space:nowrap;
+    opacity:0.95;
+  }
+  @media (max-width:600px){
+    .brand__tagline{
+      font-size:10px;
+      letter-spacing:.08em;
+    }
+  }
+  /* desktop nav links */
+  .nav__links{
+    margin-left:auto;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  /* &quot;active&quot; look for current page */
+  .nav__links a.active{
+    position:relative;
+  }
+  .nav__links a.active::after{
+    content:&quot;&quot;;
+    position:absolute;
+    left:0;
+    bottom:-4px;
+    width:100%;
+    height:2px;
+    border-radius:999px;
+    background:linear-gradient(90deg,var(--amber),#ffd168);
+  }
+  /* mobile toggle */
+  .nav__toggle{
+    display:none;
+    margin-left:auto;
+    border:0;
+    background:transparent;
+    color:#ffffff;
+    padding:8px;
+    border-radius:8px;
+  }
+  .nav__burger,
+  .nav__burger::before,
+  .nav__burger::after{
+    display:block;
+    width:24px;
+    height:2px;
+    background:#ffffff;
+    content:&quot;&quot;;
+    transition:transform .25s ease, opacity .2s ease;
+    border-radius:1px;
+  }
+  .nav__burger::before{margin-top:-7px;}
+  .nav__burger::after{margin-top:5px;}
+  .sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+  }
+  /* mobile layout rules */
+  @media (max-width:960px){
+    .nav__toggle{display:inline-flex;}
+    .nav__links{
+      position:absolute;
+      left:0;
+      right:0;
+      top:100%;
+      display:none;
+      flex-direction:column;
+      gap:8px;
+      background:var(--navy);
+      padding:12px 20px;
+      border-bottom:1px solid rgba(255,255,255,.14);
+    }
+    .nav.open .nav__links{display:flex;}
+    .nav.open .nav__burger{
+      transform:rotate(45deg);
+    }
+    .nav.open .nav__burger::before{
+      transform:translateY(7px) rotate(90deg);
+    }
+    .nav.open .nav__burger::after{
+      opacity:0;
+    }
+  }
+  /* --- Hero --- */
+  .hero{
+    position:relative;
+    min-height:48vh;
+    display:grid;
+    place-items:center;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    padding:10px 0 200px;
+  }
+  @media (max-width:960px){
+    .hero{
+      min-height:56vh;
+      padding:10px 0 20px;
+    }
+  }
+  .hero__bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+  }
+  .hero__video{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:120vw;
+    height:120vh;
+    object-fit:cover;
+    transform:translate(-50%,-50%) scale(1.18);
+    pointer-events:none;
+    filter:brightness(.9) saturate(1.05);
+  }
+  .hero__content{
+    position:relative;
+    z-index:1;
+    width:100%;
+  }
+  .hero__panel{
+    max-width:780px;
+    margin:0 auto;
+    border-radius:18px;
+    padding:24px;
+    border:1px solid rgba(255,255,255,.24);
+    backdrop-filter:blur(6px);
+    background:linear-gradient(135deg, rgba(10,31,68,.68), rgba(15,61,145,.6));
+    box-shadow:0 16px 40px rgba(0,0,0,.45);
+  }
+  .hero__btns{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:16px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero__bg{
+      background:radial-gradient(circle at top left, rgba(255,255,255,.08), transparent 55%);
+    }
+    .hero__video{display:none;}
+  }
+  /* --- Cards --- */
+  .card{
+    border-radius:var(--radius-card);
+    padding:20px 22px;
+    background:linear-gradient(
+      135deg,
+      rgba(10,31,68,0.96),
+      rgba(178,34,52,0.55),
+      rgba(10,31,68,0.98)
+    );
+    border:1px solid var(--amber);
+    box-shadow:
+      0 0 0 1px rgba(255,176,0,0.22),
+      var(--shadow-card);
+  }
+  /* --- Simple layout for this page --- */
+  .vault-layout-two-col{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:32px;
+    align-items:flex-start;
+  }
+  @media (max-width:960px){
+    .vault-layout-two-col{
+      grid-template-columns:1fr;
+    }
+  }
+  .vault-body p{
+    margin:0 0 12px;
+    color:#e4e9ff;
+    font-size:15px;
+    line-height:1.7;
+  }
+  .vault-list{
+    margin:10px 0 0;
+    padding-left:18px;
+    list-style:disc;
+    font-size:14px;
+    color:#e4e9ff;
+  }
+  .vault-list li{
+    margin-bottom:8px;
+  }
+  .vault-note{
+    font-size:13px;
+    color:#fbbf77;
+    margin-top:8px;
+  }
+  .vault-cta{
+    max-width:900px;
+    margin:0 auto;
+  }
+  /* --- Footer --- */
+  .footer{
+    padding:48px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+    background:linear-gradient(180deg,rgba(10,31,68,.7),rgba(10,31,68,.85));
+  }
+  .footer__grid{
+    display:grid;
+    gap:24px;
+    grid-template-columns:1.4fr .8fr;
+  }
+  @media (max-width:960px){
+    .footer__grid{grid-template-columns:1fr;}
+  }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- ========== GLOBAL HEADER / NAV ========== --&gt;
+  &lt;header class=&quot;nav&quot; role=&quot;banner&quot; aria-label=&quot;Primary Navigation&quot;&gt;
+    &lt;div class=&quot;container nav__inner&quot;&gt;
+      &lt;!-- Brand / Logo --&gt;
+      &lt;a class=&quot;brand&quot; href=&quot;/&quot;&gt;
+        &lt;img class=&quot;brand__logo&quot; src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/tempencorelogo.png&quot; alt=&quot;Encore Services logo&quot; loading=&quot;eager&quot; height=&quot;36&quot;&gt;
+        &lt;span class=&quot;brand__tagline&quot;&gt;Performance Determines Success&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;!-- Mobile burger button --&gt;
+      &lt;button class=&quot;nav__toggle&quot; aria-label=&quot;Open menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;site-menu&quot;&gt;
+        &lt;span class=&quot;nav__burger&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+        &lt;span class=&quot;sr-only&quot;&gt;Toggle menu&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;!-- Main nav links --&gt;
+      &lt;nav id=&quot;site-menu&quot; class=&quot;nav__links&quot; role=&quot;navigation&quot; aria-label=&quot;Site&quot;&gt;
+        &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
+        &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
+        &lt;a href=&quot;/capabilities&quot;&gt;Capabilities&lt;/a&gt;
+        &lt;!-- Replaced LedgerLocc with Vault Access --&gt;
+        &lt;a href=&quot;/vault-access&quot; class=&quot;active&quot;&gt;Vault Access&lt;/a&gt;
+        &lt;a class=&quot;btn btn-primary&quot; href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+  &lt;!-- ========== HERO ========== --&gt;
+  &lt;section class=&quot;hero&quot;&gt;
+    &lt;div class=&quot;hero__bg&quot;&gt;
+      &lt;video class=&quot;hero__video&quot; autoplay muted loop playsinline&gt;
+        &lt;source src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/12/vault-access.mp4&quot; type=&quot;video/mp4&quot;&gt;
+        Your browser does not support the video tag.
+      &lt;/video&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;hero__content&quot;&gt;
+      &lt;div class=&quot;hero__panel container&quot;&gt;
+        &lt;div class=&quot;eyebrow&quot;&gt;Vault Access &amp;amp; Briefing&lt;/div&gt;
+        &lt;h1 class=&quot;h1&quot; style=&quot;margin-top:8px&quot;&gt;Secure AI Mission Vault — Read-Ahead Briefing.&lt;/h1&gt;
+        &lt;p class=&quot;lead&quot;&gt;
+          The Secure AI Mission Vault is Encore’s private catalog of next-generation AI systems and
+          smart technology. This page gives you a fast overview of what the Vault is, what’s inside,
+          and how individual program sites work—before you step into the catalog itself.
+        &lt;/p&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;margin-top:10px;font-size:15px;max-width:70ch;&quot;&gt;
+          There are no passwords or approvals here. This is a briefing for mission owners, oversight teams,
+          and critical infrastructure partners so you know what you’re looking at when you open the Vault.
+        &lt;/p&gt;
+        &lt;div class=&quot;hero__btns&quot;&gt;
+          &lt;a href=&quot;/vault&quot; class=&quot;btn btn-primary&quot;&gt;Open the Vault&lt;/a&gt;
+          &lt;a href=&quot;#contact&quot; class=&quot;btn btn-ghost&quot;&gt;Contact Encore&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== WHAT IS THE VAULT ========== --&gt;
+  &lt;section class=&quot;section&quot; id=&quot;overview&quot;&gt;
+    &lt;div class=&quot;container vault-layout-two-col&quot;&gt;
+      &lt;div class=&quot;vault-body&quot;&gt;
+        &lt;h2 class=&quot;h2&quot;&gt;What is the Secure AI Mission Vault?&lt;/h2&gt;
+        &lt;p&gt;
+          The &lt;strong&gt;Secure AI Mission Vault&lt;/strong&gt; is Encore’s private catalog of
+          &lt;strong&gt;AI-native systems and smart technology&lt;/strong&gt; built specifically for government,
+          oversight bodies, and critical-infrastructure operators.
+        &lt;/p&gt;
+        &lt;p&gt;
+          It’s where we keep the capabilities that don’t belong on a public marketing site:
+          AI copilots, intelligent agents, and secure platforms that already run inside real missions—
+          with security, auditability, and governance designed for the public sector.
+        &lt;/p&gt;
+        &lt;p&gt;
+          Inside the Vault, you can see how these systems are organized, what problems they solve,
+          and how they can plug into your programs, oversight frameworks, and operational environments.
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;aside class=&quot;card&quot;&gt;
+        &lt;div class=&quot;eyebrow&quot;&gt;What this page is&lt;/div&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;margin-top:8px;&quot;&gt;
+          This &lt;strong&gt;Vault Access&lt;/strong&gt; page is a briefing, not a gate:
+        &lt;/p&gt;
+        &lt;ul class=&quot;vault-list&quot;&gt;
+          &lt;li&gt;Clarifies what the Secure AI Mission Vault actually is.&lt;/li&gt;
+          &lt;li&gt;Summarizes the types of AI and smart tech you’ll encounter inside.&lt;/li&gt;
+          &lt;li&gt;Explains how individual program sites (like LedgerLOCC and AcuSight Pro) are handled.&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;p class=&quot;vault-note&quot;&gt;
+          When you’re ready, click &lt;strong&gt;Open the Vault&lt;/strong&gt; to go directly to the catalog. This page is here
+          so you don’t have to clutter the tech store with long explanations.
+        &lt;/p&gt;
+      &lt;/aside&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== WHAT'S INSIDE ========== --&gt;
+  &lt;section class=&quot;section&quot; id=&quot;inside&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;h2 class=&quot;h2&quot;&gt;What you’ll see once you enter&lt;/h2&gt;
+      &lt;p class=&quot;muted&quot; style=&quot;max-width:70ch;margin-top:6px;&quot;&gt;
+        Once you open the Vault, you’ll see a curated set of mission-ready AI systems and smart platforms—
+        all built to operate inside real public-sector constraints.
+      &lt;/p&gt;
+      &lt;div class=&quot;card&quot; style=&quot;margin-top:20px;&quot;&gt;
+        &lt;ul class=&quot;vault-list&quot;&gt;
+          &lt;li&gt;
+            &lt;strong&gt;AI Copilots for Analysts &amp;amp; Investigators&lt;/strong&gt; –
+            multi-agent copilots that read cases, cross-reference sources, flag anomalies,
+            and draft recommended actions with full traceability and human-in-the-loop control.
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;strong&gt;Autonomous Monitoring &amp;amp; Oversight Engines&lt;/strong&gt; –
+            always-on AI watching transactions, logs, and operations in real time, surfacing risk patterns
+            and explaining &lt;em&gt;why&lt;/em&gt; an alert was raised.
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;strong&gt;Secure Data Environments with Built-in AI&lt;/strong&gt; –
+            platforms like &lt;strong&gt;LedgerLOCC&lt;/strong&gt;, where multiple agencies can collaborate in a shared
+            data space, run powerful AI workloads, and still maintain strict permissions, audit trails,
+            and chain-of-custody.
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;strong&gt;AI Decision &amp;amp; Sense-Making Systems&lt;/strong&gt; –
+            tools like &lt;strong&gt;AcuSight Pro&lt;/strong&gt; that fuse large, noisy data streams, generate concise
+            briefings, compare scenarios, and provide &lt;strong&gt;explainable&lt;/strong&gt; recommendations rather
+            than opaque scores.
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;strong&gt;Experimental &amp;amp; Emerging AI Modules&lt;/strong&gt; –
+            early-stage capabilities (new model architectures, multi-agent systems, advanced retrieval and
+            reasoning pipelines) available to select partners for live mission trials and feedback.
+          &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;margin-top:12px;&quot;&gt;
+          Each system in the Vault is described in terms of &lt;strong&gt;mission outcome&lt;/strong&gt;, the kinds of data
+          it touches, and how its safeguards, logging, and audit trails operate in practice.
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== INDIVIDUAL PROGRAM SITES ========== --&gt;
+  &lt;section class=&quot;section&quot; id=&quot;program-sites&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;h2 class=&quot;h2&quot;&gt;Access to individual program sites&lt;/h2&gt;
+      &lt;div class=&quot;vault-body&quot;&gt;
+        &lt;p&gt;
+          Several programs showcased in the Vault—such as &lt;strong&gt;LedgerLOCC&lt;/strong&gt;,
+          &lt;strong&gt;AcuSight Pro&lt;/strong&gt;, and other mission-specific platforms—have their own dedicated,
+          password-protected sites.
+        &lt;/p&gt;
+        &lt;p&gt;
+          From inside the Vault, you’ll see which systems have these deeper program sites and what they contain:
+          technical documentation, reference architectures, deployment options, and in some cases live or
+          simulated environments.
+        &lt;/p&gt;
+        &lt;p&gt;
+          If you’re interested in a specific system, you can request
+          &lt;strong&gt;direct access to that individual site&lt;/strong&gt; using Encore’s normal contact channels.
+          We’ll review your mission context and, if appropriate, issue
+          &lt;strong&gt;program-specific credentials&lt;/strong&gt; for that site.
+        &lt;/p&gt;
+        &lt;p class=&quot;vault-note&quot;&gt;
+          This page does not restrict access—it simply explains the landscape. When you click
+          &lt;strong&gt;Open the Vault&lt;/strong&gt; in the hero, you go straight to the Secure AI Mission Vault catalog.
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== CONTACT CTA (NO FORM) ========== --&gt;
+  &lt;section class=&quot;section&quot; id=&quot;contact&quot;&gt;
+    &lt;div class=&quot;container vault-cta&quot;&gt;
+      &lt;div class=&quot;card&quot;&gt;
+        &lt;div class=&quot;eyebrow&quot;&gt;Contact&lt;/div&gt;
+        &lt;h2 class=&quot;h2&quot;&gt;Turn Ideas into Partnerships&lt;/h2&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;max-width:65ch;margin-top:6px;&quot;&gt;
+          If you’d like to talk about a specific AI system in the Vault, explore a new mission concept,
+          or request access to an individual program site, reach out directly.
+        &lt;/p&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;margin-top:10px;&quot;&gt;
+          &lt;strong&gt;Encore Services, LLC&lt;/strong&gt; ·
+          9500 Medical Center Drive, Suite 300, Largo, MD 20774 ·
+          &lt;a href=&quot;tel:12024608668&quot; style=&quot;color:#ffe29a;text-decoration:underline;&quot;&gt;202-460-8668&lt;/a&gt; ·
+          &lt;a href=&quot;mailto:jwoodson@encoresvcsllc.com&quot; style=&quot;color:#ffe29a;text-decoration:underline;&quot;&gt;
+            jwoodson@encoresvcsllc.com
+          &lt;/a&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== GLOBAL FOOTER ========== --&gt;
+  &lt;footer class=&quot;footer&quot; role=&quot;contentinfo&quot;&gt;
+    &lt;div class=&quot;container footer__grid&quot;&gt;
+      &lt;div&gt;
+        &lt;div class=&quot;brand&quot;&gt;
+          &lt;img
+            class=&quot;brand__logo&quot;
+            src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/tempencorelogo.png&quot;
+            alt=&quot;Encore Services logo&quot;
+            height=&quot;32&quot;
+            loading=&quot;lazy&quot;
+          &gt;
+        &lt;/div&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;margin-top:8px&quot;&gt;
+          Over a decade delivering innovative solutions with integrity, professionalism,
+          and a customer-first culture.
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;div class=&quot;muted&quot;&gt;
+          © 2025 Encore Services, LLC · SDVOSB · GSA Schedule 70 #47QTCA18D00BX
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+  &lt;script&gt;
+  /* Accessible mobile nav toggle */
+  (function(){
+    var nav    = document.querySelector('.nav');
+    var toggle = document.querySelector('.nav__toggle');
+    var menu   = document.getElementById('site-menu');
+    if (!nav || !toggle || !menu) return;
+    function setOpen(open){
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+    toggle.addEventListener('click', function(){
+      var open = toggle.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+    // Close when a link is clicked (mobile)
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setOpen(false); });
+    });
+    // Close on Escape
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape'){ setOpen(false); toggle.blur(); }
+    });
+  })();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

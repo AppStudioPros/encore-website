@@ -1,0 +1,1105 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;/&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;/&gt;
+  &lt;title&gt;Encore Services — About Us&lt;/title&gt;
+  &lt;style&gt;
+    /* =======================================
+       Encore Base Styles (Reusable Across Pages)
+       (from your home page)
+       ======================================= */
+    /* --- Design tokens --- */
+    :root{
+      --navy:#0A1F44;
+      --red:#B22234;
+      --sky:#0f3d91;
+      --amber:#FFB000;
+      --white:#ffffff;
+      --ink:#101828;
+      --radius-card:16px;
+      --radius-btn:12px;
+      --shadow-card:0 18px 40px rgba(0,0,0,0.55);
+      --shadow-btn:0 8px 20px rgba(255,176,0,0.28);
+      --page-max-width:1140px;
+      --page-gutter:20px;
+      --section-padding-y:78px;
+    }
+    /* --- Base reset / typography --- */
+    html,body{
+      margin:0;
+      padding:0;
+    }
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:#ffffff;
+      background:linear-gradient(180deg, rgba(10,31,68,0.98), rgba(5,12,30,1));
+    }
+    *,
+    *::before,
+    *::after{
+      box-sizing:border-box;
+    }
+    a{
+      color:#e7eefc;
+      text-decoration:none;
+    }
+    a:hover{
+      text-decoration:underline;
+    }
+    a:focus-visible,
+    button:focus-visible{
+      outline:2px solid #ffd168;
+      outline-offset:2px;
+    }
+    /* --- Layout primitives --- */
+    .container{
+      max-width:var(--page-max-width);
+      margin:0 auto;
+      padding:0 var(--page-gutter);
+    }
+    .section{
+      padding:var(--section-padding-y) 0;
+    }
+    /* --- Typographic helpers --- */
+    .eyebrow{
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:#9fb7ff;
+    }
+    .h1{
+      font-family:ui-serif, Georgia, &quot;Times New Roman&quot;, serif;
+      font-weight:800;
+      line-height:1.1;
+      font-size:clamp(32px,4.4vw,56px);
+      background:linear-gradient(92deg,#ffffff,#e9f1ff 35%,#ffd168 70%,#ffffff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .h2{
+      font-family:ui-serif, Georgia, &quot;Times New Roman&quot;, serif;
+      font-weight:800;
+      line-height:1.15;
+      font-size:clamp(26px,3.2vw,40px);
+      color:#ffffff;
+      margin-bottom:10px;
+    }
+    .muted{
+      color:#d3ddff;
+    }
+    /* --- Buttons --- */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:11px 16px;
+      border-radius:var(--radius-btn);
+      font-weight:800;
+      border:0;
+      cursor:pointer;
+      font-size:15px;
+      line-height:1.2;
+    }
+    .btn-primary{
+      background:linear-gradient(90deg,var(--amber),#ffd168);
+      color:#1a1200;
+      box-shadow:var(--shadow-btn);
+    }
+    .btn-ghost{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.14);
+      color:#e7eefc;
+    }
+    /* --- Nav (desktop + mobile) --- */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:40;
+      background:linear-gradient(180deg,rgba(10,31,68,.9),rgba(10,31,68,.65));
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav__inner{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      padding:14px 20px;
+    }
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      font-weight:900;
+    }
+    .brand__logo{
+      height:80px;
+      width:auto;
+      display:block;
+    }
+    /* desktop nav links */
+    .nav__links{
+      margin-left:auto;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    /* mobile toggle */
+    .nav__toggle{
+      display:none;
+      margin-left:auto;
+      border:0;
+      background:transparent;
+      color:#ffffff;
+      padding:8px;
+      border-radius:8px;
+    }
+    .nav__burger,
+    .nav__burger::before,
+    .nav__burger::after{
+      display:block;
+      width:24px;
+      height:2px;
+      background:#ffffff;
+      content:&quot;&quot;;
+      transition:transform .25s ease, opacity .2s ease;
+      border-radius:1px;
+    }
+    .nav__burger::before{margin-top:-7px;}
+    .nav__burger::after{margin-top:5px;}
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+    /* mobile layout rules */
+    @media (max-width:960px){
+      .nav__toggle{display:inline-flex;}
+      .nav__links{
+        position:absolute;
+        left:0;
+        right:0;
+        top:100%;
+        display:none;
+        flex-direction:column;
+        gap:8px;
+        background:var(--navy);
+        padding:12px 20px;
+        border-bottom:1px solid rgba(255,255,255,.14);
+      }
+      .nav.open .nav__links{display:flex;}
+      .nav.open .nav__burger{
+        transform:rotate(45deg);
+      }
+      .nav.open .nav__burger::before{
+        transform:translateY(7px) rotate(90deg);
+      }
+      .nav.open .nav__burger::after{
+        opacity:0;
+      }
+    }
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      font-weight:900;
+    }
+    /* tagline to the right of the logo */
+    .brand__tagline{
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#FFE29A;
+      white-space:nowrap;
+      opacity:0.95;
+    }
+    @media (max-width: 600px){
+      .brand__tagline{
+        font-size:10px;
+        letter-spacing:.08em;
+      }
+    }
+    /* --- Hero --- */
+    .hero{
+      position:relative;
+      min-height:48vh;
+      display:grid;
+      place-items:center;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      padding:10px 0 200px;
+    }
+    @media (max-width:960px){
+      .hero{
+        min-height:56vh;
+        padding:10px 0 20px;
+      }
+    }
+    .hero__bg{
+      position:absolute;
+      inset:0;
+      z-index:0;
+      overflow:hidden;
+    }
+    .hero__bg video,
+    .hero__video{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:120vw;
+      height:120vh;
+      object-fit:cover;
+      transform:translate(-50%,-50%) scale(1.18);
+      pointer-events:none;
+      filter:brightness(.9) saturate(1.05);
+    }
+    .hero__content{
+      position:relative;
+      z-index:1;
+      width:100%;
+    }
+    .hero__panel{
+      max-width:780px;
+      margin:0 auto;
+      border-radius:18px;
+      padding:24px;
+      border:1px solid rgba(255,255,255,.24);
+      backdrop-filter:blur(6px);
+      background:linear-gradient(135deg, rgba(10,31,68,.68), rgba(15,61,145,.6));
+      box-shadow:0 16px 40px rgba(0,0,0,.45);
+    }
+    .hero__btns{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    /* --- Grids --- */
+    .cards-3{
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+    @media (max-width:960px){
+      .cards-3{grid-template-columns:repeat(2,1fr);}
+    }
+    @media (max-width:640px){
+      .cards-3{grid-template-columns:1fr;}
+    }
+    /* contact two-column */
+    .contact-grid{
+      display:grid;
+      gap:16px;
+      grid-template-columns:1.25fr .9fr;
+    }
+    @media (max-width:960px){
+      .contact-grid{grid-template-columns:1fr;}
+    }
+    /* --- Cards --- */
+    .card{
+      border-radius:var(--radius-card);
+      padding:20px 22px;
+      background:linear-gradient(
+        135deg,
+        rgba(10,31,68,0.96),
+        rgba(178,34,52,0.55),
+        rgba(10,31,68,0.98)
+      );
+      border:1px solid var(--amber);
+      box-shadow:
+        0 0 0 1px rgba(255,176,0,0.22),
+        var(--shadow-card);
+    }
+    /* --- Sponsors module (not used here, kept for consistency) --- */
+    .sponsors-grid{
+      display:grid;
+      gap:16px;
+      grid-template-columns:repeat(4,1fr);
+    }
+    @media (max-width:960px){
+      .sponsors-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    @media (max-width:640px){
+      .sponsors-grid{grid-template-columns:1fr;}
+    }
+    .col{
+      height:360px;
+      overflow:hidden;
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.18);
+      position:relative;
+    }
+    .stack{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      padding:10px;
+    }
+    .sponsor-card{
+      width:100%;
+      aspect-ratio:1 / 1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.24);
+      border-radius:12px;
+      transition:transform .2s ease,box-shadow .2s ease;
+      padding:10px;
+    }
+    .sponsor-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 22px rgba(0,0,0,.28),
+                 0 0 0 4px rgba(255,255,255,.06) inset;
+    }
+    .sponsor-img{
+      max-width:70%;
+      max-height:70%;
+      object-fit:contain;
+      filter:saturate(0) brightness(.96) contrast(1.1);
+    }
+    /* continuous vertical scroll */
+    @keyframes scrollUp{
+      0%{transform:translateY(0);}
+      100%{transform:translateY(-50%);}
+    }
+    @keyframes scrollDown{
+      0%{transform:translateY(-50%);}
+      100%{transform:translateY(0);}
+    }
+    .anim-up{animation:scrollUp 22s linear infinite;}
+    .anim-down{animation:scrollDown 22s linear infinite;}
+    .col:hover .anim-up,
+    .col:hover .anim-down{
+      animation-play-state:paused;
+    }
+    /* --- Footer --- */
+    .footer{
+      padding:48px 0;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg,rgba(10,31,68,.7),rgba(10,31,68,.85));
+    }
+    .footer__grid{
+      display:grid;
+      gap:24px;
+      grid-template-columns:1.4fr .8fr;
+    }
+    @media (max-width:960px){
+      .footer__grid{grid-template-columns:1fr;}
+    }
+    /* --- Reduced motion --- */
+    @media (prefers-reduced-motion: reduce){
+      .hero__bg{
+        background:radial-gradient(circle at top left, rgba(255,255,255,.08), transparent 55%);
+      }
+    }
+    /* =======================================
+       ABOUT PAGE-SPECIFIC STYLES
+       ======================================= */
+    .lead{
+      font-size:clamp(17px,2.1vw,20px);
+      line-height:1.7;
+      color:#f3f4ff;
+      margin-top:10px;
+    }
+    .about-layout{
+      display:grid;
+      grid-template-columns:1.6fr 1fr;
+      gap:32px;
+      align-items:flex-start;
+    }
+    @media (max-width:960px){
+      .about-layout{
+        grid-template-columns:1fr;
+      }
+    }
+    .about-copy p{
+      margin:0 0 12px;
+      color:#e4e9ff;
+      font-size:15px;
+      line-height:1.7;
+    }
+    .pill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:16px 0 0;
+      padding:0;
+      list-style:none;
+    }
+    .pill{
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.16);
+      color:#e7eefc;
+      white-space:nowrap;
+    }
+    .stat-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px 18px;
+      margin-top:14px;
+    }
+    @media (max-width:480px){
+      .stat-grid{
+        grid-template-columns:1fr;
+      }
+    }
+    .stat-label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:#9fb7ff;
+      margin-bottom:2px;
+    }
+    .stat-value{
+      font-weight:700;
+      font-size:15px;
+      color:#ffffff;
+    }
+    .values-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+    @media (max-width:960px){
+      .values-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    }
+    @media (max-width:640px){
+      .values-grid{grid-template-columns:1fr;}
+    }
+    .value-title{
+      font-weight:700;
+      font-size:15px;
+      margin-bottom:6px;
+    }
+    .value-text{
+      font-size:14px;
+      color:#d3ddff;
+    }
+    .leader-title{
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:#9fb7ff;
+      font-weight:800;
+      margin-bottom:4px;
+    }
+    .leader-name{
+      font-size:22px;
+      font-weight:800;
+      margin-bottom:2px;
+    }
+    .leader-meta{
+      font-size:13px;
+      color:#d3ddff;
+      margin-bottom:12px;
+    }
+    /* ========== CONTACT SECTION / NINJA FORMS STYLE ========== */
+    .contact-section .contact-grid{
+      display:grid;
+      gap:32px;
+      grid-template-columns:1fr 1fr;
+      align-items:start;
+    }
+    @media (max-width:960px){
+      .contact-section .contact-grid{
+        grid-template-columns:1fr;
+      }
+    }
+    .contact-section .contact-card{
+      max-width:none;
+      justify-self:stretch;
+    }
+    .contact-section .nf-form-cont{
+      color:#e5edff;
+      font-family:inherit;
+    }
+    .contact-section .nf-field-label label,
+    .contact-section .nf-field .nf-before-field .nf-field-label label{
+      color:#ffffff;
+      font-weight:800;
+    }
+    .contact-section .nf-form-cont input[type=&quot;text&quot;],
+    .contact-section .nf-form-cont input[type=&quot;email&quot;],
+    .contact-section .nf-form-cont input[type=&quot;tel&quot;],
+    .contact-section .nf-form-cont input[type=&quot;url&quot;],
+    .contact-section .nf-form-cont input[type=&quot;number&quot;],
+    .contact-section .nf-form-cont input[type=&quot;date&quot;],
+    .contact-section .nf-form-cont select,
+    .contact-section .nf-form-cont textarea{
+      width:100%;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.18);
+      color:#e5edff;
+      border-radius:12px;
+      padding:12px 14px;
+      transition:
+        box-shadow .15s ease,
+        border-color .15s ease,
+        background .15s ease;
+    }
+    .contact-section .nf-form-cont ::placeholder{
+      color:#cdd8ff;
+      opacity:.85;
+    }
+    .contact-section .nf-form-cont input:focus,
+    .contact-section .nf-form-cont select:focus,
+    .contact-section .nf-form-cont textarea:focus{
+      outline:none;
+      border-color:#9fb7ff;
+      box-shadow:0 0 0 3px rgba(159,183,255,.35);
+      background:rgba(255,255,255,.09);
+    }
+    .contact-section .nf-form-cont input[type=&quot;checkbox&quot;],
+    .contact-section .nf-form-cont input[type=&quot;radio&quot;]{
+      accent-color:var(--amber);
+    }
+    .contact-section .nf-form-cont .nf-field input[type=&quot;submit&quot;],
+    .contact-section .nf-form-cont .nf-field input[type=&quot;button&quot;],
+    .contact-section .nf-form-cont .submit-wrap .ninja-forms-field{
+      background:linear-gradient(90deg, var(--amber), #FFD168);
+      color:#1a1200;
+      font-weight:800;
+      border:0;
+      border-radius:12px;
+      padding:12px 18px;
+      box-shadow:0 8px 20px rgba(255,176,0,.28);
+      cursor:pointer;
+    }
+    .contact-section .nf-form-cont input[type=&quot;submit&quot;]:hover{
+      filter:brightness(1.06);
+    }
+    .contact-section .nf-error input,
+    .contact-section .nf-error select,
+    .contact-section .nf-error textarea{
+      border-color:#ff6b6b !important;
+      box-shadow:0 0 0 3px rgba(255,107,107,.25) !important;
+    }
+    .contact-section .nf-error-msg,
+    .contact-section .ninja-forms-req-symbol{
+      color:#ffd1d1;
+    }
+    .contact-section .nf-response-msg{
+      background:rgba(34,197,94,.12);
+      border:1px solid rgba(34,197,94,.35);
+      color:#daf5e4;
+      border-radius:12px;
+      padding:12px 14px;
+    }
+    /* &quot;Read full bio&quot; link-style button */
+    .leader-more{
+      margin-top:10px;
+      padding:0;
+      border:0;
+      background:none;
+      color:#FFE29A;
+      font-size:13px;
+      font-weight:600;
+      text-decoration:underline;
+      cursor:pointer;
+    }
+    .leader-more:hover{
+      opacity:.9;
+    }
+    /* Modal shell */
+    .bio-modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:60;
+    }
+    .bio-modal.is-open{
+      display:flex;
+    }
+    .bio-modal__backdrop{
+      position:absolute;
+      inset:0;
+      background:rgba(2,6,23,.84);
+      backdrop-filter:blur(6px);
+    }
+    .bio-modal__dialog{
+      position:relative;
+      width:100%;
+      max-width:880px;
+      padding:20px;
+      z-index:1;
+    }
+    .bio-modal__close{
+      position:absolute;
+      top:12px;
+      right:16px;
+      border:0;
+      background:transparent;
+      color:#fff;
+      font-size:22px;
+      line-height:1;
+      cursor:pointer;
+    }
+    .bio-modal__close:hover{
+      opacity:.8;
+    }
+    @media (max-width: 640px){
+      .bio-modal__dialog{
+        padding:12px;
+      }
+    }
+    /* =======================================
+       NEW: LEADERSHIP CARD GRID + PHOTOS
+       ======================================= */
+    .bio-card{
+      width:100%;
+    }
+    .bio-card-grid{
+      display:grid;
+      grid-template-columns:minmax(0,2fr) minmax(0,1.4fr);
+      gap:24px;
+      align-items:flex-start;
+    }
+    .bio-card-main p{
+      margin:0 0 10px;
+      font-size:14px;
+      color:#dfe5ff;
+      line-height:1.7;
+    }
+    .bio-photo-wrapper{
+      display:flex;
+      justify-content:flex-end;
+    }
+    .bio-photo-frame{
+      border-radius:var(--radius-card);
+      padding:3px;
+      background:linear-gradient(135deg,var(--amber),#FFD168);
+      box-shadow:0 12px 30px rgba(0,0,0,.55);
+      max-width:260px;
+      width:100%;
+    }
+    .bio-photo{
+      display:block;
+      width:100%;
+      height:auto;
+      border-radius:calc(var(--radius-card) - 3px);
+      object-fit:cover;
+      background:#000;
+    }
+    @media (max-width:960px){
+      .bio-card-grid{
+        grid-template-columns:1fr;
+      }
+      .bio-photo-wrapper{
+        justify-content:center;
+      }
+      .bio-photo-frame{
+        max-width:260px;
+      }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- ========== GLOBAL HEADER / NAV ========== --&gt;
+  &lt;header class=&quot;nav&quot; role=&quot;banner&quot; aria-label=&quot;Primary Navigation&quot;&gt;
+    &lt;div class=&quot;container nav__inner&quot;&gt;
+      &lt;!-- Brand / Logo --&gt;
+      &lt;a class=&quot;brand&quot; href=&quot;/&quot;&gt;
+        &lt;span class=&quot;brand__flag&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+        &lt;img class=&quot;brand__logo&quot; src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/tempencorelogo.png&quot; alt=&quot;Encore Services logo&quot; loading=&quot;eager&quot; height=&quot;36&quot;&gt;
+        &lt;span class=&quot;brand__tagline&quot;&gt;Performance Determines Success&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;!-- Mobile burger button --&gt;
+      &lt;button class=&quot;nav__toggle&quot; aria-label=&quot;Open menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;site-menu&quot;&gt;
+        &lt;span class=&quot;nav__burger&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+        &lt;span class=&quot;sr-only&quot;&gt;Toggle menu&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;!-- Main nav links --&gt;
+      &lt;nav id=&quot;site-menu&quot; class=&quot;nav__links&quot; role=&quot;navigation&quot; aria-label=&quot;Site&quot;&gt;
+        &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
+        &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
+        &lt;a href=&quot;/capabilities&quot;&gt;Capabilities&lt;/a&gt;
+        &lt;a href=&quot;/ai-guide&quot;&gt;AI Guide&lt;/a&gt;
+        &lt;a href=&quot;/programs&quot;&gt;Programs&lt;/a&gt;
+        &lt;a class=&quot;btn btn-primary&quot; href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+  &lt;!-- HERO --&gt;
+  &lt;section class=&quot;hero&quot;&gt;
+    &lt;div class=&quot;hero__bg&quot;&gt;
+      &lt;video class=&quot;hero__video&quot; autoplay muted loop playsinline&gt;
+        &lt;source src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/digital-flag.mp4&quot; type=&quot;video/mp4&quot;&gt;
+        Your browser does not support the video tag.
+      &lt;/video&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;hero__content&quot;&gt;
+      &lt;div class=&quot;hero__panel container&quot;&gt;
+        &lt;div class=&quot;eyebrow&quot;&gt;About Encore&lt;/div&gt;
+        &lt;h1 class=&quot;h1&quot; style=&quot;margin-top:8px&quot;&gt;Service-Disabled Veterans. Mission-Focused Teams.&lt;/h1&gt;
+        &lt;p class=&quot;lead&quot;&gt;
+          Encore Services, LLC is a Service-Disabled Veteran-Owned Small Business (SDVOSB) delivering
+          professional, scientific, administrative, technical, and management support services to Federal and
+          State governments—as well as commercial clients—across the United States.
+        &lt;/p&gt;
+        &lt;div class=&quot;hero__btns&quot;&gt;
+          &lt;a href=&quot;#contact&quot; class=&quot;btn btn-primary&quot;&gt;Connect with Encore&lt;/a&gt;
+          &lt;a href=&quot;/capabilities&quot; class=&quot;btn btn-ghost&quot;&gt;View Capabilities&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- CORPORATE PROFILE --&gt;
+  &lt;section class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container about-layout&quot;&gt;
+      &lt;div class=&quot;about-copy&quot;&gt;
+        &lt;h2 class=&quot;h2&quot;&gt;Corporate Profile&lt;/h2&gt;
+        &lt;p&gt;
+          Encore Services, LLC (Encore) is a &lt;strong&gt;Service Disabled Veteran Owned Small Business (SDVOSB)&lt;/strong&gt;
+          dedicated to delivering multi-disciplinary professional, scientific, administrative, technical, and management support services to Federal and State governments, as well as commercial clients in the Washington, D.C. metropolitan area and across the United States.
+        &lt;/p&gt;
+        &lt;p&gt;
+          Headquartered in &lt;strong&gt;Largo, Maryland&lt;/strong&gt;, Encore combines mission-focused discipline with modern engineering and technology expertise. Our success is built on open, transparent communication; a single point of contact for all contract activities; and a culture of accountability that extends from day one of performance through successful completion.
+        &lt;/p&gt;
+        &lt;p&gt;
+          As a rapidly growing provider of administrative, management, and information technology support services, Encore possesses the agility of a small business with the capabilities of a sophisticated technology firm. We design and deliver &lt;strong&gt;secure, scalable, and cost-effective solutions&lt;/strong&gt; that integrate advanced software engineering, AI-driven automation, data intelligence, and robust digital infrastructure. Our distinctive business processes and methods ensure consistent, high-quality performance—contract after contract, project after project.
+        &lt;/p&gt;
+        &lt;p&gt;
+          At Encore, every team member shares a single mandate: meet and exceed the needs of our clients while continuously seeking opportunities to innovate and improve. We equip our professionals with modern tools, real-time information, and strong technical and operational support so they can deliver superior quality, responsive service, and technology-enabled outcomes that advance our clients’ missions.
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;!-- RIGHT COLUMN: ENCORE AT A GLANCE --&gt;
+      &lt;aside class=&quot;card&quot;&gt;
+        &lt;div class=&quot;eyebrow&quot;&gt;Encore at a Glance&lt;/div&gt;
+        &lt;p class=&quot;lead&quot; style=&quot;font-size:15px;margin-top:10px;&quot;&gt;
+          Veteran-founded. Mission-driven. Focused on delivering measurable results for every client we serve.
+        &lt;/p&gt;
+        &lt;ul class=&quot;pill-list&quot;&gt;
+          &lt;li class=&quot;pill&quot;&gt;SDVOSB&lt;/li&gt;
+          &lt;li class=&quot;pill&quot;&gt;Federal &amp;amp; State&lt;/li&gt;
+          &lt;li class=&quot;pill&quot;&gt;Commercial Clients&lt;/li&gt;
+          &lt;li class=&quot;pill&quot;&gt;Management &amp;amp; IT&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;div class=&quot;stat-grid&quot;&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;stat-label&quot;&gt;Founded&lt;/div&gt;
+            &lt;div class=&quot;stat-value&quot;&gt;2010&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;stat-label&quot;&gt;Headquarters&lt;/div&gt;
+            &lt;div class=&quot;stat-value&quot;&gt;Largo, Maryland&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;div class=&quot;stat-label&quot;&gt;Industry&lt;/div&gt;
+            &lt;div class=&quot;stat-value&quot;&gt;Business &amp;amp; Professional Services&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;h3 class=&quot;h2&quot; style=&quot;font-size:20px;margin-top:24px;margin-bottom:6px;&quot;&gt;How We Deliver&lt;/h3&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;margin-bottom:0;&quot;&gt;
+          • Single point of contact for all activities&lt;br/&gt;
+          • Highly qualified personnel and tailored teams&lt;br/&gt;
+          • Documented processes and methods for consistent quality&lt;br/&gt;
+          • Continuous improvement mindset on every engagement
+        &lt;/p&gt;
+      &lt;/aside&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- MISSION &amp; VISION (ONE COLUMN) --&gt;
+  &lt;section class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container&quot; style=&quot;max-width:900px;&quot;&gt;
+      &lt;h2 class=&quot;h2&quot;&gt;Mission&lt;/h2&gt;
+      &lt;p&gt;
+        Our mission is to be the &lt;strong&gt;trusted partner of choice&lt;/strong&gt; for government and commercial clients by delivering innovative, reliable, and efficient support services powered by advanced technology, intelligent systems, and modern engineering excellence. We are committed to strengthening our clients’ missions with secure, scalable solutions that automate operations, enhance performance, and respect the values and sacrifices of those who serve.
+      &lt;/p&gt;
+      &lt;h2 class=&quot;h2&quot; style=&quot;margin-top:32px;&quot;&gt;Our Vision&lt;/h2&gt;
+      &lt;p&gt;
+        Our vision is to become the contractor of choice in our industry by uniting world-class service with cutting-edge technology. Through &lt;strong&gt;competency, loyalty, and teamwork&lt;/strong&gt;, we aim to deliver forward-thinking solutions—including AI-driven platforms, robust digital infrastructure, and next-generation security systems—that elevate mission success and set new standards for efficiency and innovation.
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- CULTURE &amp; VALUES --&gt;
+  &lt;section class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;h2 class=&quot;h2&quot;&gt;Our Culture &amp;amp; Values&lt;/h2&gt;
+      &lt;p class=&quot;muted&quot; style=&quot;max-width:720px;margin-top:6px;&quot;&gt;
+        Encore’s culture reflects unwavering customer focus, integrity, and professionalism—
+        strengthened by a modern engineering mindset. Our teams operate with the precision of
+        full-stack system architects, the creativity of experienced application developers, and the
+        discipline of cybersecurity and AI engineers.
+      &lt;/p&gt;
+      &lt;p class=&quot;muted&quot; style=&quot;max-width:720px;margin-top:12px;&quot;&gt;
+        We hire exceptional talent, invest in comprehensive technical and operational training, and
+        support our project teams with an infrastructure built around automation, secure data systems,
+        cloud architecture, and intelligent tools. This ensures our clients consistently receive
+        reliable, technology-enhanced, mission-aligned support on every engagement.
+      &lt;/p&gt;
+      &lt;div class=&quot;values-grid&quot; style=&quot;margin-top:32px;&quot;&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;Customer Focus&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot;&gt;
+            We start with the mission and work backward—aligning people, processes, and technology to
+            meet the precise needs of each client and each program.
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;Integrity &amp;amp; Professionalism&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot;&gt;
+            Our teams are trusted in sensitive environments. We uphold the highest standards of ethics,
+            compliance, and professional conduct in every engagement.
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;Teamwork &amp;amp; Loyalty&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot;&gt;
+            We succeed together. Encore fosters collaborative, cross-functional teams that share
+            knowledge, support one another, and deliver unified results for our customers.
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;Operational Excellence&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot;&gt;
+            We rely on proven methods, disciplined execution, clear communication, and continuously
+            refined processes to ensure quality, accountability, and performance at every level.
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;Innovation &amp;amp; Engineering&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot;&gt;
+            We apply modern engineering practices—including automation, cloud solutions,
+            secure data architectures, and intelligent tools—to improve mission outcomes without
+            disrupting critical operations.
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;value-title&quot;&gt;People First&lt;/div&gt;
+          &lt;p class=&quot;value-text&quot;&gt;
+            We hire exceptional professionals, provide comprehensive training, and invest in long-term
+            development—because empowered people deliver exceptional mission results.
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- LEADERSHIP --&gt;
+  &lt;section class=&quot;section&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;h2 class=&quot;h2&quot;&gt;Leadership&lt;/h2&gt;
+      &lt;p class=&quot;muted&quot; style=&quot;max-width:720px;margin-top:6px;&quot;&gt;
+        Encore Services, LLC benefits from experienced leadership across federal contracting, consulting,
+        logistics, and personnel management—anchored by a commitment to service and results.
+      &lt;/p&gt;
+      &lt;!-- JEFF WOODSON 2-COLUMN CARD --&gt;
+&lt;article class=&quot;card bio-card&quot; style=&quot;margin-top:20px;&quot;&gt;
+  &lt;div class=&quot;bio-card-grid&quot;&gt;
+    &lt;!-- LEFT COLUMN — ALL CONTENT --&gt;
+    &lt;div class=&quot;bio-card-main&quot;&gt;
+      &lt;div class=&quot;leader-title&quot;&gt;Founder &amp;amp; Chief Executive Officer&lt;/div&gt;
+      &lt;div class=&quot;leader-name&quot;&gt;Dr. Jeff Woodson&lt;/div&gt;
+      &lt;div class=&quot;leader-meta&quot;&gt;
+        Encore Services, LLC&lt;br/&gt;
+        Based in Bowie, Maryland
+      &lt;/div&gt;
+      &lt;p&gt;
+        Dr. Jeff Woodson is the Founder and CEO of Encore Services LLC, an IT Services company he established
+        in 2010 that now supports Federal Government clients with secure, scalable, and innovative technology
+        solutions. With expertise spanning IT infrastructure, program management, help desk operations,
+        cybersecurity, software development, and digital transformation, he leads with a focus on operational
+        excellence, measurable outcomes, and client success.
+      &lt;/p&gt;
+      &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt;
+        A U.S. Army veteran and survivor of the September 11, 2001 Pentagon attack, Dr. Woodson brings
+        resilience, integrity, and mission-driven leadership to every aspect of his work. He resides in
+        Bowie, Maryland, and remains deeply committed to community service, supporting numerous charitable
+        causes throughout his life.
+      &lt;/p&gt;
+      &lt;p class=&quot;muted&quot; style=&quot;font-size:13px;&quot;&gt;
+        &lt;em&gt;“Our responsibility is to deliver for the mission, take care of our people, and earn our clients’ trust
+        every single day.”&lt;/em&gt;
+      &lt;/p&gt;
+      &lt;button type=&quot;button&quot;
+              class=&quot;leader-more&quot;
+              data-bio-open=&quot;woodson-bio-modal&quot;&gt;
+        Read full bio
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;!-- RIGHT COLUMN — PHOTO --&gt;
+    &lt;div class=&quot;bio-photo-wrapper&quot;&gt;
+      &lt;div class=&quot;bio-photo-frame&quot;&gt;
+        &lt;img
+          src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/image000000-1-e1763472831950.jpg&quot;
+          alt=&quot;Portrait of Dr. Jeff Woodson&quot;
+          class=&quot;bio-photo&quot;
+        /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;
+&lt;!-- COREY STRANGE 2-COLUMN CARD --&gt; &lt;article class=&quot;card bio-card&quot; style=&quot;margin-top:30px;&quot;&gt; &lt;div class=&quot;bio-card-grid&quot;&gt; &lt;!-- LEFT COLUMN — ALL CONTENT --&gt; &lt;div class=&quot;bio-card-main&quot;&gt; &lt;div class=&quot;leader-title&quot;&gt;Fractional Chief Technology Officer&lt;/div&gt; &lt;div class=&quot;leader-name&quot;&gt;Corey Strange&lt;/div&gt; &lt;div class=&quot;leader-meta&quot;&gt; Encore Services, LLC&lt;br/&gt; Based in Bowie, Maryland &lt;/div&gt; &lt;p&gt; Corey Strange is a veteran software engineer, application developer, AI engineer, and full-stack systems architect with over two decades of experience building secure, scalable, and high-performance technology solutions. As founder of Mobile Computer Specialists, Web Design Pros 365, and App Studio Pro, he has delivered 300+ custom websites, 150+ enterprise and security systems, and more than 150 cross-platform applications across iOS, Android, and web. &lt;/p&gt; &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt; Corey specializes in advanced system architecture, server and cybersecurity engineering, AI-powered application design, and blockchain development — including custom tokens and Web3 integrations for major networks like Solana and XRP. A former innovator in the early PC performance industry, whose water-cooled computer company was later acquired by Alienware, Corey continues to lead cutting-edge engineering initiatives and holds multiple utility patents. &lt;/p&gt; &lt;button type=&quot;button&quot; class=&quot;leader-more&quot; data-bio-open=&quot;strange-bio-modal&quot;&gt; Read full bio &lt;/button&gt; &lt;/div&gt; &lt;!-- RIGHT COLUMN — PHOTO --&gt; &lt;div class=&quot;bio-photo-wrapper&quot;&gt; &lt;div class=&quot;bio-photo-frame&quot;&gt; &lt;img src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/Corey-Strange2.png&quot; alt=&quot;Portrait of Corey Strange&quot; class=&quot;bio-photo&quot; /&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/article&gt;
+      &lt;!-- FULL BIO MODAL: DR. JEFF WOODSON --&gt;
+      &lt;div class=&quot;bio-modal&quot; id=&quot;woodson-bio-modal&quot; aria-hidden=&quot;true&quot;&gt;
+        &lt;div class=&quot;bio-modal__backdrop&quot; data-bio-close&gt;&lt;/div&gt;
+        &lt;div class=&quot;bio-modal__dialog&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;woodson-bio-title&quot;&gt;
+          &lt;article class=&quot;card&quot;&gt;
+            &lt;button class=&quot;bio-modal__close&quot; type=&quot;button&quot; aria-label=&quot;Close full bio&quot; data-bio-close&gt;&amp;times;&lt;/button&gt;
+            &lt;div class=&quot;leader-title&quot;&gt;Founder &amp;amp; Chief Executive Officer&lt;/div&gt;
+            &lt;div class=&quot;leader-name&quot; id=&quot;woodson-bio-title&quot;&gt;Dr. Jeff Woodson&lt;/div&gt;
+            &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt;
+              Dr. Jeff Woodson is the Founder and Chief Executive Officer of Encore Services LLC, an Information
+              Technology Services company he launched in 2010 with a mission to deliver high-quality,
+              forward-thinking IT solutions. Under his leadership, Encore Services has evolved into a trusted
+              and respected partner to the Federal Government, providing comprehensive IT support and strategic
+              consulting services that enable organizations to operate securely, efficiently, and with confidence.
+            &lt;/p&gt;
+            &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt;
+              With a strong emphasis on innovation, operational excellence, and measurable client success,
+              Dr. Woodson has guided Encore Services in designing and deploying secure, scalable, and
+              future-ready technology solutions. His areas of expertise span IT infrastructure management,
+              program and project leadership, help desk operations, cybersecurity, software design and development,
+              and digital transformation initiatives. Across all engagements, he is dedicated to ensuring that
+              technology becomes a driver of performance—not a barrier to it.
+            &lt;/p&gt;
+            &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt;
+              Dr. Woodson is widely recognized for fostering a culture of integrity, collaboration, and continuous
+              improvement within his organization. He is committed to empowering clients with the tools, knowledge,
+              and strategic insight they need to thrive in an increasingly complex digital landscape. His leadership
+              philosophy is rooted in service, accountability, and the belief that strong partnerships create
+              lasting impact.
+            &lt;/p&gt;
+            &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt;
+              A proud veteran of the United States Army, Dr. Woodson is also a survivor of the September 11, 2001
+              Pentagon attack. These profound experiences helped shape his resilience, perspective, and unwavering
+              commitment to mission-focused excellence. They continue to inform his approach to leadership, service,
+              and the pursuit of meaningful work.
+            &lt;/p&gt;
+            &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt;
+              Dr. Woodson resides in Bowie, Maryland, where he is surrounded by family and friends. Beyond his
+              professional endeavors, he is dedicated to giving back to his community and has passionately
+              supported numerous charitable causes and events throughout his life. His personal and professional
+              legacy is defined by service, perseverance, and a deep commitment to helping others succeed.
+            &lt;/p&gt;
+          &lt;/article&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+&lt;!-- FULL BIO MODAL: COREY STRANGE --&gt; &lt;div class=&quot;bio-modal&quot; id=&quot;strange-bio-modal&quot; aria-hidden=&quot;true&quot;&gt; &lt;div class=&quot;bio-modal__backdrop&quot; data-bio-close&gt;&lt;/div&gt; &lt;div class=&quot;bio-modal__dialog&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;strange-bio-title&quot;&gt; &lt;article class=&quot;card&quot;&gt; &lt;button class=&quot;bio-modal__close&quot; type=&quot;button&quot; aria-label=&quot;Close full bio&quot; data-bio-close&gt;&amp;times;&lt;/button&gt; &lt;div class=&quot;leader-title&quot;&gt;Fractional Chief Technology Officer&lt;/div&gt; &lt;div class=&quot;leader-name&quot; id=&quot;strange-bio-title&quot;&gt;Corey Strange&lt;/div&gt; &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt; Corey Strange is a seasoned software engineer, application developer, AI engineer, and full-stack systems architect with more than two decades of experience designing complex, scalable, and secure technology solutions. As the founder of Mobile Computer Specialists, Web Design Pros 365, and App Studio Pro, Corey has built multiple top-rated technology firms that have delivered over 300 custom websites, engineered 150+ enterprise and security systems, and served more than 5,000 clients across industries including finance, real estate, publishing, healthcare, logistics, and cybersecurity. &lt;/p&gt; &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt; A deeply versatile engineer, Corey is proficient across front-end, back-end, and infrastructure layers, with expertise spanning server architecture, cloud systems, cybersecurity hardening, database engineering, API design, and advanced custom code development. His broad technical fluency enables him to architect full-stack solutions from the ground up — including the logic, security, integrations, and user experience that tie them together. &lt;/p&gt; &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt; As an AI engineer, Corey integrates large language models, vector databases, and AI-powered automation into modern applications. His work enhances application intelligence, performance, and security while enabling businesses to leverage advanced machine learning workflows in real-time. He specializes in embedding AI into mobile, web, and cross-platform systems to streamline operations, elevate user experience, and unlock new capabilities for clients. &lt;/p&gt; &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt; Corey’s engineering career includes notable early contributions to the high-performance computing industry. As founder of Rocket PC, one of the world’s first water-cooled computer companies, he collaborated with hardware innovators such as CoolTechnia and consulted with engineers from AMD and Samsung on emerging memory technologies, including DDR4 and ECC server RAM instruction architecture. Rocket PC was eventually acquired by Alienware — which was later acquired by Dell. &lt;/p&gt; &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt; Through App Studio Pro, Corey leads a high-level team specializing in cross-platform application development, including iOS, Android, and web-based systems. The company has built more than 150 advanced applications across blockchain, crypto tokens, NFT ecosystems, enterprise security, financial platforms, supply-chain systems, and Web3 environments. Their work is known for merging UI/UX precision with robust back-end engineering and AI-driven intelligence. &lt;/p&gt; &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt; With over eight years of experience in blockchain architecture, Corey is also a recognized expert in decentralized systems and cryptocurrency development. He has created and minted custom tokens across Solana, XRP, and multiple blockchain networks, and he engineers secure cold-wallet solutions, decentralized application logic, and enterprise-ready Web3 integrations. &lt;/p&gt; &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt; Corey’s portfolio includes major platforms such as LedgerLocc, Contractor Guardians, and FoodShadow — solutions that showcase his ability to merge engineering excellence with functional innovation. His ongoing work includes the development of next-generation intelligent systems focused on automation, security, and seamless global connectivity. &lt;/p&gt; &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt; As an inventor, Corey currently holds three utility patents, with an additional three patents planned for release by 2026. His innovations focus on advanced system logic, AI-driven architectures, and software technologies pushing the boundaries of modern engineering. &lt;/p&gt; &lt;p class=&quot;muted&quot; style=&quot;font-size:14px;&quot;&gt; Across all his ventures, Corey is known for his engineering precision, visionary problem-solving, and dedication to building secure, scalable systems that empower businesses to thrive in a constantly evolving digital landscape. &lt;/p&gt; &lt;/article&gt; &lt;/div&gt; &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== GLOBAL CONTACT SECTION ========== --&gt;
+  &lt;section id=&quot;contact&quot; class=&quot;section section--navy contact-section&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;div class=&quot;contact-grid&quot;&gt;
+        &lt;!-- Left: Contact details / copy --&gt;
+        &lt;div class=&quot;card&quot;&gt;
+          &lt;div class=&quot;eyebrow&quot;&gt;Contact&lt;/div&gt;
+          &lt;h2 class=&quot;h2&quot;&gt;Turn Ideas into Partnerships&lt;/h2&gt;
+          &lt;p class=&quot;muted&quot; style=&quot;max-width:65ch&quot;&gt;
+            Encore Services, LLC · 9500 Medical Center Drive, Suite 300, Largo, MD 20774 ·
+            202-460-8668 ·
+            &lt;a href=&quot;mailto:info@encoresvcsllc.com&quot; style=&quot;color:#ffe29a;text-decoration:underline&quot;&gt;
+              jwoodson@encoresvcsllc.com
+            &lt;/a&gt;
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;!-- Right: Form card (Ninja Forms) --&gt;
+        &lt;div class=&quot;card contact-card&quot;&gt;
+          [ninja_form id=1]
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== GLOBAL FOOTER ========== --&gt;
+  &lt;footer class=&quot;footer&quot; role=&quot;contentinfo&quot;&gt;
+    &lt;div class=&quot;container footer__grid&quot;&gt;
+      &lt;div&gt;
+        &lt;div class=&quot;brand&quot;&gt;
+          &lt;img
+            class=&quot;brand__logo&quot;
+            src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/tempencorelogo.png&quot;
+            alt=&quot;Encore Services logo&quot;
+            height=&quot;32&quot;
+            loading=&quot;lazy&quot;
+          &gt;
+        &lt;/div&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;margin-top:8px&quot;&gt;
+          Over a decade delivering innovative solutions with integrity, professionalism,
+          and a customer-first culture.
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;div class=&quot;muted&quot;&gt;
+          © 2025 Encore Services, LLC · SDVOSB · GSA Schedule 70 #47QTCA18D00BX
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+  &lt;script&gt;
+    /* Accessible mobile nav toggle */
+    (function(){
+      var nav    = document.querySelector('.nav');
+      var toggle = document.querySelector('.nav__toggle');
+      var menu   = document.getElementById('site-menu');
+      if (!nav || !toggle || !menu) return;
+      function setOpen(open){
+        nav.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+      }
+      toggle.addEventListener('click', function(){
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        setOpen(!open);
+      });
+      menu.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){ setOpen(false); });
+      });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape'){
+          setOpen(false);
+          toggle.blur();
+        }
+      });
+    })();
+  &lt;/script&gt;
+  &lt;script&gt;
+    (function(){
+      var openButtons  = document.querySelectorAll('[data-bio-open]');
+      var closeTargets = document.querySelectorAll('[data-bio-close], .bio-modal__backdrop');
+      openButtons.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var id    = btn.getAttribute('data-bio-open');
+          var modal = document.getElementById(id);
+          if (!modal) return;
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+        });
+      });
+      closeTargets.forEach(function(el){
+        el.addEventListener('click', function(){
+          var modal = el.closest('.bio-modal');
+          if (!modal) return;
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+        });
+      });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape'){
+          document.querySelectorAll('.bio-modal.is-open').forEach(function(m){
+            m.classList.remove('is-open');
+            m.setAttribute('aria-hidden', 'true');
+          });
+        }
+      });
+    })();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

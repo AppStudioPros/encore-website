@@ -1,0 +1,572 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;/&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;/&gt;
+  &lt;title&gt;Programs — Encore Services&lt;/title&gt;
+  &lt;style&gt;
+  /* =======================================
+     Encore Base Styles (Reusable Across Pages)
+     ======================================= */
+  :root{
+    --navy:#0A1F44;
+    --red:#B22234;
+    --sky:#0f3d91;
+    --amber:#FFB000;
+    --white:#ffffff;
+    --ink:#101828;
+    --radius-card:16px;
+    --radius-btn:12px;
+    --shadow-card:0 18px 40px rgba(0,0,0,0.55);
+    --shadow-btn:0 8px 20px rgba(255,176,0,0.28);
+    --page-max-width:1140px;
+    --page-gutter:20px;
+    --section-padding-y:78px;
+  }
+  html,body{
+    margin:0;
+    padding:0;
+  }
+  body{
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    color:#ffffff;
+    background:linear-gradient(180deg, rgba(10,31,68,0.98), rgba(5,12,30,1));
+  }
+  *,
+  *::before,
+  *::after{
+    box-sizing:border-box;
+  }
+  a{
+    color:#e7eefc;
+    text-decoration:none;
+  }
+  a:hover{
+    text-decoration:underline;
+  }
+  a:focus-visible,
+  button:focus-visible{
+    outline:2px solid #ffd168;
+    outline-offset:2px;
+  }
+  .container{
+    max-width:var(--page-max-width);
+    margin:0 auto;
+    padding:0 var(--page-gutter);
+  }
+  .section{
+    padding:var(--section-padding-y) 0;
+  }
+  .eyebrow{
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:#9fb7ff;
+  }
+  .h1{
+    font-family:ui-serif, Georgia, &quot;Times New Roman&quot;, serif;
+    font-weight:800;
+    line-height:1.1;
+    font-size:clamp(32px,4.4vw,56px);
+    background:linear-gradient(92deg,#ffffff,#e9f1ff 35%,#ffd168 70%,#ffffff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .h2{
+    font-family:ui-serif, Georgia, &quot;Times New Roman&quot;, serif;
+    font-weight:800;
+    line-height:1.15;
+    font-size:clamp(26px,3.2vw,40px);
+    color:#ffffff;
+    margin-bottom:10px;
+  }
+  .muted{
+    color:#d3ddff;
+  }
+  .lead{
+    font-size:clamp(17px,2.1vw,20px);
+    line-height:1.7;
+    color:#f3f4ff;
+    margin-top:10px;
+  }
+  /* --- Buttons --- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:11px 16px;
+    border-radius:var(--radius-btn);
+    font-weight:800;
+    border:0;
+    cursor:pointer;
+    font-size:15px;
+    line-height:1.2;
+  }
+  .btn-primary{
+    background:linear-gradient(90deg,var(--amber),#ffd168);
+    color:#1a1200;
+    box-shadow:var(--shadow-btn);
+  }
+  .btn-ghost{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    color:#e7eefc;
+  }
+  /* --- Nav (desktop + mobile) --- */
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:40;
+    background:linear-gradient(180deg,rgba(10,31,68,.9),rgba(10,31,68,.65));
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .nav__inner{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:14px 20px;
+  }
+  .brand{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    font-weight:900;
+  }
+  .brand__logo{
+    height:80px;
+    width:auto;
+    display:block;
+  }
+  .brand__tagline{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#FFE29A;
+    white-space:nowrap;
+    opacity:0.95;
+  }
+  @media (max-width:600px){
+    .brand__tagline{
+      font-size:10px;
+      letter-spacing:.08em;
+    }
+  }
+  .nav__links{
+    margin-left:auto;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .nav__toggle{
+    display:none;
+    margin-left:auto;
+    border:0;
+    background:transparent;
+    color:#ffffff;
+    padding:8px;
+    border-radius:8px;
+  }
+  .nav__burger,
+  .nav__burger::before,
+  .nav__burger::after{
+    display:block;
+    width:24px;
+    height:2px;
+    background:#ffffff;
+    content:&quot;&quot;;
+    transition:transform .25s ease, opacity .2s ease;
+    border-radius:1px;
+  }
+  .nav__burger::before{margin-top:-7px;}
+  .nav__burger::after{margin-top:5px;}
+  .sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+  }
+  @media (max-width:960px){
+    .nav__toggle{display:inline-flex;}
+    .nav__links{
+      position:absolute;
+      left:0;
+      right:0;
+      top:100%;
+      display:none;
+      flex-direction:column;
+      gap:8px;
+      background:var(--navy);
+      padding:12px 20px;
+      border-bottom:1px solid rgba(255,255,255,.14);
+    }
+    .nav.open .nav__links{display:flex;}
+    .nav.open .nav__burger{
+      transform:rotate(45deg);
+    }
+    .nav.open .nav__burger::before{
+      transform:translateY(7px) rotate(90deg);
+    }
+    .nav.open .nav__burger::after{
+      opacity:0;
+    }
+  }
+  /* --- Hero (no overlap) --- */
+  .hero{
+    position:relative;
+    min-height:40vh;
+    display:grid;
+    place-items:center;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    padding:10px 0 80px;
+  }
+  @media (max-width:960px){
+    .hero{
+      min-height:46vh;
+      padding:10px 0 40px;
+    }
+  }
+  .hero__bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+  }
+  .hero__video{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:120vw;
+    height:120vh;
+    object-fit:cover;
+    transform:translate(-50%,-50%) scale(1.18);
+    pointer-events:none;
+    filter:brightness(.9) saturate(1.05);
+  }
+  .hero__content{
+    position:relative;
+    z-index:1;
+    width:100%;
+  }
+  .hero__panel{
+    max-width:780px;
+    margin:0 auto;
+    border-radius:18px;
+    padding:24px;
+    border:1px solid rgba(255,255,255,.24);
+    backdrop-filter:blur(6px);
+    background:linear-gradient(135deg, rgba(10,31,68,.68), rgba(15,61,145,.6));
+    box-shadow:0 16px 40px rgba(0,0,0,.45);
+  }
+  .hero__btns{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:16px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero__bg{
+      background:radial-gradient(circle at top left, rgba(255,255,255,.08), transparent 55%);
+    }
+    .hero__video{display:none;}
+  }
+  /* --- Cards --- */
+  .card{
+    border-radius:var(--radius-card);
+    padding:20px 22px;
+    background:linear-gradient(
+      135deg,
+      rgba(10,31,68,0.96),
+      rgba(178,34,52,0.55),
+      rgba(10,31,68,0.98)
+    );
+    border:1px solid var(--amber);
+    box-shadow:
+      0 0 0 1px rgba(255,176,0,0.22),
+      var(--shadow-card);
+  }
+  /* Vault cards layout */
+  .vault-card-stack{
+    width:100%;
+    max-width:var(--page-max-width);
+    margin:24px auto 0;
+    display:grid;
+    gap:28px;
+  }
+  /* 2 columns on larger screens */
+  @media (min-width: 992px){
+    .vault-card-stack{
+      grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+  }
+  .vault-card{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    height:100%;
+  }
+  .vault-card-header{
+    display:flex;
+    gap:18px;
+    align-items:center;
+  }
+  .vault-card-logo{
+    flex:0 0 auto;
+    width:150px;
+    height:64px;
+    border-radius:18px;
+    background:rgba(255,255,255,0.80);
+    padding:0;
+    object-fit:contain;
+    border:1px solid rgba(255,255,255,0.35);
+  }
+  .vault-card-title{
+    margin:0 0 4px;
+    font-size:18px;
+    font-weight:700;
+    color:#ffffff;
+  }
+  .vault-card-tagline{
+    margin:0;
+    font-size:13px;
+    color:#cbd5ff;
+  }
+  .vault-card-body{
+    font-size:14px;
+    color:#e4e9ff;
+    line-height:1.7;
+  }
+  /* push footer to the bottom */
+  .vault-card-footer{
+    margin-top:auto;
+    display:flex;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .vault-card-footer .btn{
+    font-size:14px;
+    padding:9px 14px;
+  }
+  /* Contact / CTA card */
+  .vault-cta{
+    max-width:900px;
+    margin:0 auto;
+  }
+  /* Footer */
+  .footer{
+    padding:48px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+    background:linear-gradient(180deg,rgba(10,31,68,.7),rgba(10,31,68,.85));
+  }
+  .footer__grid{
+    display:grid;
+    gap:24px;
+    grid-template-columns:1.4fr .8fr;
+  }
+  @media (max-width:960px){
+    .footer__grid{grid-template-columns:1fr;}
+  }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- ========== GLOBAL HEADER / NAV ========== --&gt;
+  &lt;header class=&quot;nav&quot; role=&quot;banner&quot; aria-label=&quot;Primary Navigation&quot;&gt;
+    &lt;div class=&quot;container nav__inner&quot;&gt;
+      &lt;a class=&quot;brand&quot; href=&quot;/&quot;&gt;
+        &lt;img class=&quot;brand__logo&quot; src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/tempencorelogo.png&quot; alt=&quot;Encore Services logo&quot; loading=&quot;eager&quot; height=&quot;36&quot;&gt;
+        &lt;span class=&quot;brand__tagline&quot;&gt;Performance Determines Success&lt;/span&gt;
+      &lt;/a&gt;
+      &lt;button class=&quot;nav__toggle&quot; aria-label=&quot;Open menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;site-menu&quot;&gt;
+        &lt;span class=&quot;nav__burger&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+        &lt;span class=&quot;sr-only&quot;&gt;Toggle menu&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;nav id=&quot;site-menu&quot; class=&quot;nav__links&quot; role=&quot;navigation&quot; aria-label=&quot;Site&quot;&gt;
+        &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
+        &lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;
+        &lt;a href=&quot;/capabilities&quot;&gt;Capabilities&lt;/a&gt;
+        &lt;a href=&quot;/ai-guide&quot;&gt;AI Guide&lt;/a&gt;
+        &lt;a href=&quot;/programs&quot;&gt;Programs&lt;/a&gt;
+        &lt;a class=&quot;btn btn-primary&quot; href=&quot;#vault-request&quot;&gt;Contact&lt;/a&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+  &lt;!-- ========== HERO ========== --&gt; 
+  &lt;section class=&quot;hero&quot;&gt; &lt;div class=&quot;hero__bg&quot;&gt; 
+  &lt;video class=&quot;hero__video&quot; autoplay muted loop playsinline&gt; &lt;source src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/12/cyber-security-technology-fraud-prevention-and-pri-2025-12-09-04-49-17-utc.mov&quot;&gt; Your browser does not support the video tag. &lt;/video&gt; 
+  &lt;/div&gt; 
+  &lt;div class=&quot;hero__content&quot;&gt; 
+  &lt;div class=&quot;hero__panel container&quot;&gt; 
+  &lt;div class=&quot;eyebrow&quot;&gt;Secure AI Mission Vault&lt;/div&gt; 
+  &lt;h1 class=&quot;h1&quot; style=&quot;margin-top:8px&quot;&gt;Mission-ready AI systems and smart tech.&lt;/h1&gt; 
+  &lt;p class=&quot;lead&quot;&gt; This is the catalog—a single-source view of the AI copilots, oversight engines, and secure platforms Encore is building for government, regulators, and critical-infrastructure missions. &lt;/p&gt;
+        &lt;/div&gt; 
+        &lt;/div&gt; 
+        &lt;/section&gt;
+  &lt;!-- ========== PROGRAM CARDS ========== --&gt;
+  &lt;section class=&quot;section&quot; id=&quot;vault-programs&quot;&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;h2 class=&quot;h2&quot;&gt;Programs and Capabilities&lt;/h2&gt;
+      &lt;p class=&quot;muted&quot; style=&quot;max-width:70ch;margin-top:6px;&quot;&gt;
+        Names and branding are shown here for awareness. Program details, architecture, and use
+        cases are discussed only in direct briefings with Encore.
+      &lt;/p&gt;
+      &lt;div class=&quot;vault-card-stack&quot; style=&quot;margin-top:24px;&quot;&gt;
+        &lt;!-- CARD: LedgerLocc --&gt;
+        &lt;article class=&quot;card vault-card&quot;&gt;
+          &lt;header class=&quot;vault-card-header&quot;&gt;
+            &lt;img class=&quot;vault-card-logo&quot;
+                 src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/12/LLbluewhite.png&quot;
+                 alt=&quot;LedgerLocc logo&quot;&gt;
+            &lt;div&gt;
+              &lt;h3 class=&quot;vault-card-title&quot;&gt;LedgerLocc&lt;/h3&gt;
+              &lt;p class=&quot;vault-card-tagline&quot;&gt;Encore flagship platform program.&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/header&gt;
+          &lt;p class=&quot;vault-card-body&quot;&gt;
+            LedgerLocc is an innovative Encore program. To explore whether it aligns with your mission needs, request a conversation
+            with the team.
+          &lt;/p&gt;
+          &lt;div class=&quot;vault-card-footer&quot;&gt;
+            &lt;a href=&quot;#vault-request&quot; class=&quot;btn btn-primary&quot;&gt;Request a briefing&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+        &lt;!-- CARD: AcuSightPro --&gt;
+        &lt;article class=&quot;card vault-card&quot;&gt;
+          &lt;header class=&quot;vault-card-header&quot;&gt;
+            &lt;img class=&quot;vault-card-logo&quot;
+                 src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/12/color-scaled.png&quot;
+                 alt=&quot;AcuSightPro logo&quot;&gt;
+            &lt;div&gt;
+              &lt;h3 class=&quot;vault-card-title&quot;&gt;AcuSightPro&lt;/h3&gt;
+              &lt;p class=&quot;vault-card-tagline&quot;&gt;Advanced mission technology initiative.&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/header&gt;
+          &lt;p class=&quot;vault-card-body&quot;&gt;
+            AcuSightPro is an Encore initiative. If you would like
+            to learn more, contact the Encore team. 
+          &lt;/p&gt;
+          &lt;div class=&quot;vault-card-footer&quot;&gt;
+            &lt;a href=&quot;#vault-request&quot; class=&quot;btn btn-primary&quot;&gt;Request a briefing&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+        &lt;!-- CARD: CypherMission (Coming Soon) --&gt;
+        &lt;article class=&quot;card vault-card&quot;&gt;
+          &lt;header class=&quot;vault-card-header&quot;&gt;
+            &lt;!-- Temporary &quot;Coming Soon&quot; logo block --&gt;
+            &lt;div class=&quot;vault-card-logo&quot;
+                 style=&quot;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#1a1200;text-transform:uppercase;letter-spacing:.12em;&quot;&gt;
+              Coming Soon
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;h3 class=&quot;vault-card-title&quot;&gt;CypherMission&lt;/h3&gt;
+              &lt;p class=&quot;vault-card-tagline&quot;&gt;Emerging Encore program (coming soon).&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/header&gt;
+          &lt;p class=&quot;vault-card-body&quot;&gt;
+            CypherMission is an upcoming Encore program. For specific objectives, design, and operating
+            concepts please request access by filling out the form below.
+          &lt;/p&gt;
+          &lt;div class=&quot;vault-card-footer&quot;&gt;
+            &lt;a href=&quot;#vault-request&quot; class=&quot;btn btn-primary&quot;&gt;Request a briefing&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+        &lt;!-- CARD: Phylax One (Coming Soon) --&gt;
+        &lt;article class=&quot;card vault-card&quot;&gt;
+          &lt;header class=&quot;vault-card-header&quot;&gt;
+            &lt;img class=&quot;vault-card-logo&quot;
+                 src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/12/PHYLAX-ONE-scaled.png&quot;
+                 alt=&quot;Phylax One logo&quot;&gt;
+            &lt;div&gt;
+              &lt;h3 class=&quot;vault-card-title&quot;&gt;Phylax One&lt;/h3&gt;
+              &lt;p class=&quot;vault-card-tagline&quot;&gt;Next-generation intelligence initiative.&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/header&gt;
+          &lt;p class=&quot;vault-card-body&quot;&gt;
+            Phylax One is a forthcoming Encore initiative. You may note your interest below to
+            be included in future conversations.
+          &lt;/p&gt;
+          &lt;div class=&quot;vault-card-footer&quot;&gt;
+            &lt;a href=&quot;#vault-request&quot; class=&quot;btn btn-primary&quot;&gt;Request a briefing&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== NINJA FORM / CONTACT ========== --&gt;
+  &lt;section class=&quot;section&quot; id=&quot;vault-request&quot;&gt;
+    &lt;div class=&quot;container vault-cta&quot;&gt;
+      &lt;div class=&quot;card&quot;&gt;
+        &lt;div class=&quot;eyebrow&quot;&gt;Contact&lt;/div&gt;
+        &lt;h2 class=&quot;h2&quot;&gt;Request a confidential briefing.&lt;/h2&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;max-width:65ch;margin-top:6px;&quot;&gt;
+          To learn more about any Encore program listed on this page, please complete the form
+          and include the program name(s) and any relevant mission or organizational context.
+        &lt;/p&gt;
+        &lt;div style=&quot;margin-top:18px;&quot;&gt;
+          &lt;!-- WordPress will render the Ninja Form here --&gt;
+          [ninja_form id=2]
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;!-- ========== FOOTER ========== --&gt;
+  &lt;footer class=&quot;footer&quot; role=&quot;contentinfo&quot;&gt;
+    &lt;div class=&quot;container footer__grid&quot;&gt;
+      &lt;div&gt;
+        &lt;div class=&quot;brand&quot;&gt;
+          &lt;img
+            class=&quot;brand__logo&quot;
+            src=&quot;https://encoresvcsllc.com/wp-content/uploads/2025/11/tempencorelogo.png&quot;
+            alt=&quot;Encore Services logo&quot;
+            height=&quot;32&quot;
+            loading=&quot;lazy&quot;
+          &gt;
+        &lt;/div&gt;
+        &lt;p class=&quot;muted&quot; style=&quot;margin-top:8px&quot;&gt;
+          Over a decade delivering innovative solutions with integrity, professionalism,
+          and a customer-first culture.
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;div class=&quot;muted&quot;&gt;
+          © 2025 Encore Services, LLC · SDVOSB · GSA Schedule 70 #47QTCA18D00BX
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+  &lt;!-- ========== SCRIPTS ========== --&gt;
+  &lt;script&gt;
+  // Accessible mobile nav toggle
+  (function(){
+    var nav    = document.querySelector('.nav');
+    var toggle = document.querySelector('.nav__toggle');
+    var menu   = document.getElementById('site-menu');
+    if (!nav || !toggle || !menu) return;
+    function setOpen(open){
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+    toggle.addEventListener('click', function(){
+      var open = toggle.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setOpen(false); });
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape'){ setOpen(false); toggle.blur(); }
+    });
+  })();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
