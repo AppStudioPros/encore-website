@@ -25,18 +25,18 @@ export default function LedgerLoccPage() {
             <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
               Unified Custody Platform
             </h2>
-            <p className="text-[#e4e9ff] text-[15px] leading-[1.7]">
+            <p className="text-muted text-[15px] leading-[1.7]">
               LedgerLocc consolidates secure communications, evidence capture, collaboration, and AI-assisted analysis
               into a <strong>single Zero-Trust domain</strong>. Instead of juggling Teams, Slack, Signal, Zoom, Webex,
               Dropbox, SharePoint, and Workstorm, agencies operate in one custody-first environment designed for legal
               authenticity and mission agility.
             </p>
-            <p className="text-[#e4e9ff] text-[15px] leading-[1.7]">
+            <p className="text-muted text-[15px] leading-[1.7]">
               The platform&apos;s <strong>Custody Intelligence Core</strong> cryptographically signs events at creation,
               chains them through their lifecycle, and anchors them into an immutable ledger. This delivers court-ready
               provenance, predictable audit, and acquisition-grade observability.
             </p>
-            <p className="text-[#e4e9ff] text-[15px] leading-[1.7] font-bold">Core objectives at a glance:</p>
+            <p className="text-muted text-[15px] leading-[1.7] font-bold">Core objectives at a glance:</p>
             <ul className="text-muted list-disc pl-4 text-sm space-y-1">
               <li>Unify operations into one Zero-Trust domain for chat, files, video, and discovery.</li>
               <li>Automate chain-of-custody with ledger-verified audit and redaction (80–90% manual effort reduction by workflow).</li>
@@ -53,8 +53,8 @@ export default function LedgerLoccPage() {
             </div>
           </div>
           <Card>
-            <div className="font-extrabold tracking-[.12em] uppercase text-xs text-eyebrow">LedgerLocc Snapshot</div>
-            <p className="text-[#f3f4ff] text-[15px] mt-2.5">
+            <div className="font-extrabold tracking-[.12em] uppercase text-xs text-cyan/60">LedgerLocc Snapshot</div>
+            <p className="text-muted text-[15px] mt-2.5">
               High-level readiness and deployment profile for LedgerLocc in government and enterprise environments.
             </p>
             <div className="grid grid-cols-2 gap-3 mt-3.5">
@@ -67,12 +67,12 @@ export default function LedgerLoccPage() {
                 { label: "Deployment", value: "AWS GovCloud · Azure Gov · On-Prem" },
               ].map((s) => (
                 <div key={s.label}>
-                  <div className="text-[11px] uppercase tracking-[.12em] text-eyebrow mb-0.5">{s.label}</div>
+                  <div className="text-[11px] uppercase tracking-[.12em] text-cyan/60 mb-0.5">{s.label}</div>
                   <div className="font-bold text-[15px]">{s.value}</div>
                 </div>
               ))}
             </div>
-            <h3 className="text-sm uppercase tracking-[.16em] text-eyebrow mt-4 mb-1">Access to LedgerLocc.com</h3>
+            <h3 className="text-sm uppercase tracking-[.16em] text-cyan/60 mt-4 mb-1">Access to LedgerLocc.com</h3>
             <p className="text-muted text-[13px]">
               The <strong>ledgerlocc.com</strong> portal is <strong>passcode protected</strong> and reserved for qualified
               government and enterprise programs. To request access, submit a brief description of your mission and
@@ -85,7 +85,7 @@ export default function LedgerLoccPage() {
       {/* VIDEO WALKTHROUGH */}
       <Section id="about-ledgerlocc">
         <Card className="max-w-[960px] mx-auto">
-          <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-1">From Capture to Courtroom</div>
+          <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-1">From Capture to Courtroom</div>
           <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)] mb-3">
             See LedgerLocc in Action
           </h2>
@@ -111,7 +111,7 @@ export default function LedgerLoccPage() {
           enforces provenance, automates redaction, and produces court-ready evidence packages.
         </p>
         <Card className="mt-4">
-          <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-1.5">Mission-Adaptive Intelligence</div>
+          <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-1.5">Mission-Adaptive Intelligence</div>
           <p className="text-muted text-[13px] mt-1.5">
             Runs inside <strong>air-gapped secure enclaves</strong> with signed models, datasets, and configs so every
             inference can be reproduced and defended.
@@ -122,21 +122,21 @@ export default function LedgerLoccPage() {
             <li><strong>Case Templating</strong>: Turn complex investigations into reusable, standards-aligned templates for agencies, legal teams, and court handoffs.</li>
           </ul>
 
-          <div className="text-sm uppercase tracking-[.16em] text-eyebrow mt-4 mb-1.5">AIRS — Auto-Redaction</div>
+          <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mt-4 mb-1.5">AIRS — Auto-Redaction</div>
           <ul className="text-muted text-[13px] list-disc pl-4 space-y-1">
             <li>Detects faces (juveniles/agents), plates, badges, and other sensitive elements.</li>
             <li>Generates pixel-perfect derivatives, cryptographically linked to the original via ledger hash.</li>
             <li>Operates on-prem or in GovCloud — no external calls — with human-in-the-loop for admissibility.</li>
           </ul>
 
-          <div className="text-sm uppercase tracking-[.16em] text-eyebrow mt-4 mb-1.5">LedgerAI — Document Intelligence</div>
+          <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mt-4 mb-1.5">LedgerAI — Document Intelligence</div>
           <ul className="text-muted text-[13px] list-disc pl-4 space-y-1">
             <li>Drafts incident reports, summaries, and briefs from case context.</li>
             <li>Suggests labels such as FOUO, CUI, and CJIS, with full prompt/model/version logging.</li>
             <li>All outputs require human review prior to finalization, with decisions recorded in the ledger.</li>
           </ul>
 
-          <div className="text-sm uppercase tracking-[.16em] text-eyebrow mt-4 mb-1.5">Austere Continuity Core</div>
+          <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mt-4 mb-1.5">Austere Continuity Core</div>
           <ul className="text-muted text-[13px] list-disc pl-4 space-y-1">
             <li>Peer-to-peer mesh (Wi-Fi Aware / BLE / NFC) with store-carry-forward routing.</li>
             <li>Edge Nodes preserve ledger continuity offline (up to 7 days) and auto-sync when reconnected.</li>
@@ -225,8 +225,8 @@ export default function LedgerLoccPage() {
       {/* ACCESS & PROCUREMENT */}
       <Section>
         <Card className="max-w-[880px] mx-auto">
-          <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-1">Request Access &amp; Procurement Package</div>
-          <div className="text-sm uppercase tracking-[.12em] text-gold-light mb-1">LedgerLocc — Custody Intelligence Platform</div>
+          <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-1">Request Access &amp; Procurement Package</div>
+          <div className="text-sm uppercase tracking-[.12em] text-cyan mb-1">LedgerLocc — Custody Intelligence Platform</div>
           <div className="text-lg font-extrabold mb-1.5">Access to LedgerLocc.com (Passcode Protected)</div>
           <div className="text-[13px] text-muted mb-2.5">
             The LedgerLocc portal and technical documentation are reserved for qualified government and enterprise
@@ -248,19 +248,19 @@ export default function LedgerLoccPage() {
       <Section id="contact" className="bg-navy">
         <div className="grid gap-4 grid-cols-1 md:grid-cols-[1.25fr_0.9fr]">
           <Card>
-            <div className="font-extrabold tracking-[.12em] uppercase text-xs text-eyebrow">Contact</div>
+            <div className="font-extrabold tracking-[.12em] uppercase text-xs text-cyan/60">Contact</div>
             <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
               Turn Ideas into Partnerships
             </h2>
             <p className="text-muted max-w-[65ch]">
               Encore Services, LLC · 9500 Medical Center Drive, Suite 300, Largo, MD 20774 · 202-460-8668 ·{" "}
-              <a href="mailto:jwoodson@encoresvcsllc.com" className="text-gold-pale underline">jwoodson@encoresvcsllc.com</a>
+              <a href="mailto:jwoodson@encoresvcsllc.com" className="text-cyan underline">jwoodson@encoresvcsllc.com</a>
             </p>
           </Card>
           <Card>
             <p className="text-muted text-sm">
               To get in touch, email{" "}
-              <a href="mailto:jwoodson@encoresvcsllc.com" className="text-gold-pale underline">jwoodson@encoresvcsllc.com</a>{" "}
+              <a href="mailto:jwoodson@encoresvcsllc.com" className="text-cyan underline">jwoodson@encoresvcsllc.com</a>{" "}
               or call (202) 460-8668.
             </p>
           </Card>

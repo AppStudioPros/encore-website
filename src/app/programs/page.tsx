@@ -69,7 +69,7 @@ export default function ProgramsPage() {
                   <p className="text-[13px] text-muted">{p.tagline}</p>
                 </div>
               </header>
-              <p className="text-[#e4e9ff] text-sm leading-[1.7]">{p.description}</p>
+              <p className="text-muted text-sm leading-[1.7]">{p.description}</p>
               <div className="mt-auto">
                 <ButtonPrimary href="#vault-request">Request a briefing</ButtonPrimary>
               </div>
@@ -81,7 +81,7 @@ export default function ProgramsPage() {
       <Section id="vault-request">
         <div className="max-w-[900px] mx-auto">
           <Card>
-            <div className="font-extrabold tracking-[.12em] uppercase text-xs text-eyebrow">Contact</div>
+            <div className="font-extrabold tracking-[.12em] uppercase text-xs text-cyan/60">Contact</div>
             <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
               Request a confidential briefing.
             </h2>
@@ -90,7 +90,7 @@ export default function ProgramsPage() {
               name(s) and any relevant mission or organizational context.
             </p>
             <p className="text-muted text-sm mt-3">
-              Email: <a href="mailto:jwoodson@encoresvcsllc.com" className="text-gold-pale underline">jwoodson@encoresvcsllc.com</a>{" "}
+              Email: <a href="mailto:jwoodson@encoresvcsllc.com" className="text-cyan underline">jwoodson@encoresvcsllc.com</a>{" "}
               · Phone: (202) 460-8668
             </p>
           </Card>

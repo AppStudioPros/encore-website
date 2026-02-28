@@ -26,12 +26,12 @@ export default function AIBuyersGuidePage() {
           <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
             Why Encore would publish this (even though it makes our job harder)
           </h2>
-          <p className="text-[#e4e9ff] text-[15px] leading-[1.85] mt-2">
+          <p className="text-muted text-[15px] leading-[1.85] mt-2">
             Let&apos;s be honest: Encore isn&apos;t going to win every contract — and we don&apos;t want a world where
             the &ldquo;winner&rdquo; is whoever can market the hardest, hide the most, or rely on buyer confusion.
             That&apos;s how under-tested systems get deployed… and how the public pays for it later.
           </p>
-          <div className="border-l-[3px] border-amber pl-4 mt-3.5 text-sm text-[#f7f1d0]">
+          <div className="border-l-[3px] border-cyan/30 pl-4 mt-3.5 text-sm text-muted">
             <strong>Our end game:</strong> raise the standard of AI in government. When every vendor has to show proof,
             explain risk, and build real safeguards, missions win — regardless of who holds the contract.
           </div>
@@ -42,20 +42,20 @@ export default function AIBuyersGuidePage() {
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-7 items-start">
           <div className="space-y-3">
-            <div className="text-[11px] uppercase tracking-[.16em] text-eyebrow">Our View</div>
+            <div className="text-[11px] uppercase tracking-[.16em] text-cyan/60">Our View</div>
             <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
               Competition is healthy. Hype is not.
             </h2>
-            <p className="text-[#e4e9ff] text-[15px] leading-[1.85]">
+            <p className="text-muted text-[15px] leading-[1.85]">
               Competition keeps companies sharp. It forces everyone to build better systems next year than they built
               this year. But &ldquo;AI&rdquo; has become a marketing word — and in government, that isn&apos;t just
               annoying. It&apos;s dangerous.
             </p>
-            <p className="text-[#e4e9ff] text-[15px] leading-[1.85]">
+            <p className="text-muted text-[15px] leading-[1.85]">
               If a vendor needs your confusion to close a deal, that vendor is a risk. If they can&apos;t explain the
               system simply, they shouldn&apos;t deploy it in missions that carry real consequences.
             </p>
-            <p className="text-[#e4e9ff] text-[15px] leading-[1.85]">
+            <p className="text-muted text-[15px] leading-[1.85]">
               Educating buyers upfront shrinks our playing field and holds us to a higher bar, too. We&apos;re fine
               with that. We don&apos;t avoid hard work — we chase it. Tough questions, lessons learned, and
               accountability are how real systems get built.
@@ -72,7 +72,7 @@ export default function AIBuyersGuidePage() {
             </div>
           </div>
           <Card>
-            <div className="text-[11px] uppercase tracking-[.16em] text-eyebrow mb-1">Why this matters</div>
+            <div className="text-[11px] uppercase tracking-[.16em] text-cyan/60 mb-1">Why this matters</div>
             <p className="text-muted text-sm leading-[1.7]">
               When AI is treated like truth, errors scale fast and accountability gets blurry. The goal of this guide is
               simple: help teams demand proof, require controls, and avoid buying &ldquo;AI-shaped risk.&rdquo;
@@ -90,7 +90,7 @@ export default function AIBuyersGuidePage() {
       {/* WHAT YOU GET IN THE PDF */}
       <Section>
         <div className="max-w-[980px] mx-auto">
-          <div className="text-[11px] uppercase tracking-[.16em] text-eyebrow mb-1">Inside the PDF</div>
+          <div className="text-[11px] uppercase tracking-[.16em] text-cyan/60 mb-1">Inside the PDF</div>
           <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
             A field guide you can bring into a meeting
           </h2>
@@ -111,7 +111,7 @@ export default function AIBuyersGuidePage() {
                 key={i}
                 className="bg-[rgba(10,31,68,0.9)] rounded-[14px] border border-white/18 p-4 shadow-[0_14px_32px_rgba(0,0,0,0.55)] text-sm text-[#dde6ff]"
               >
-                <strong className="text-gold-pale">{v.bold}</strong>
+                <strong className="text-cyan">{v.bold}</strong>
                 <br />
                 {v.text}
               </div>
@@ -127,7 +127,7 @@ export default function AIBuyersGuidePage() {
       {/* SAMPLE QUESTIONS */}
       <Section id="sample">
         <div className="max-w-[980px] mx-auto">
-          <div className="text-[11px] uppercase tracking-[.16em] text-eyebrow mb-1">Two examples (teaser)</div>
+          <div className="text-[11px] uppercase tracking-[.16em] text-cyan/60 mb-1">Two examples (teaser)</div>
           <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
             The PDF includes a full set of questions — here are two samples
           </h2>
@@ -144,7 +144,7 @@ export default function AIBuyersGuidePage() {
                 key={i}
                 className="bg-white/6 border border-white/16 rounded-[14px] p-4 shadow-[0_14px_32px_rgba(0,0,0,0.55)]"
               >
-                <span className="inline-block text-[11px] tracking-[.16em] uppercase text-eyebrow mb-1.5">
+                <span className="inline-block text-[11px] tracking-[.16em] uppercase text-cyan/60 mb-1.5">
                   Sample question
                 </span>
                 <p className="text-[#eaf0ff] text-sm leading-[1.7]">
@@ -153,7 +153,7 @@ export default function AIBuyersGuidePage() {
               </div>
             ))}
           </div>
-          <div className="border-l-[3px] border-amber pl-4 mt-4 text-sm text-[#f7f1d0]">
+          <div className="border-l-[3px] border-cyan/30 pl-4 mt-4 text-sm text-muted">
             If a vendor can&apos;t answer questions like these clearly, you&apos;re not looking at a product — you&apos;re
             looking at a risk.
           </div>
@@ -163,13 +163,13 @@ export default function AIBuyersGuidePage() {
       {/* CONTACT */}
       <Section id="contact" className="bg-navy">
         <Card>
-          <div className="font-extrabold tracking-[.12em] uppercase text-xs text-eyebrow">Contact</div>
+          <div className="font-extrabold tracking-[.12em] uppercase text-xs text-cyan/60">Contact</div>
           <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
             Talk to a Team That Welcomes Hard Questions
           </h2>
           <p className="text-muted max-w-[65ch]">
             Encore Services, LLC · 9500 Medical Center Drive, Suite 300, Largo, MD 20774 · 202-460-8668 ·{" "}
-            <a href="mailto:jwoodson@encoresvcsllc.com" className="text-gold-pale underline">jwoodson@encoresvcsllc.com</a>
+            <a href="mailto:jwoodson@encoresvcsllc.com" className="text-cyan underline">jwoodson@encoresvcsllc.com</a>
           </p>
           <p className="text-muted max-w-[65ch] text-sm mt-2">
             Whether you work with us or not, we&apos;re happy to help your team think more clearly about what AI should

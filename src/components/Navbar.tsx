@@ -26,7 +26,7 @@ export default function Navbar() {
             alt="Encore Services logo"
             className="h-20 w-auto"
           />
-          <span className="text-xs font-bold tracking-[.12em] uppercase text-gold-pale opacity-95 whitespace-nowrap hidden sm:inline">
+          <span className="text-xs font-bold tracking-[.12em] uppercase text-cyan opacity-95 whitespace-nowrap hidden sm:inline">
             Performance Determines Success
           </span>
         </Link>

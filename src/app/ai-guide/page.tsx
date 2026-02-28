@@ -25,7 +25,7 @@ export default function AIGuidePage() {
       {/* EMAIL ACCESS GATE */}
       <Section className="relative border-t border-b border-white/6">
         <div className="max-w-[980px] mx-auto">
-          <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-1">Access the Guide</div>
+          <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-1">Access the Guide</div>
           <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
             Access the Gov AI Buyer&apos;s Guide
           </h2>
@@ -34,7 +34,7 @@ export default function AIGuidePage() {
             the information and help you remember where you saw it.
           </p>
           <Card className="mt-4">
-            <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-1">Get instant access</div>
+            <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-1">Get instant access</div>
             <h3 className="font-heading font-extrabold text-lg mt-1.5 mb-2">Enter your email to open the guide</h3>
             <p className="text-muted text-sm mb-2">
               Once a valid email is entered, the button will unlock and take you straight to the AI Buyer&apos;s Guide.
@@ -72,7 +72,7 @@ export default function AIGuidePage() {
 
       {/* EDUCATIONAL SECTIONS */}
       <Section narrow>
-        <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-1">Understanding the Basics</div>
+        <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-1">Understanding the Basics</div>
         <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
           Why the Word &ldquo;AI&rdquo; Feels So Confusing
         </h2>
@@ -91,7 +91,7 @@ export default function AIGuidePage() {
       </Section>
 
       <Section narrow>
-        <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-1">A Simple Mental Model</div>
+        <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-1">A Simple Mental Model</div>
         <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
           Two Questions to Ask About Any &ldquo;AI&rdquo;
         </h2>
@@ -118,7 +118,7 @@ export default function AIGuidePage() {
       </Section>
 
       <Section narrow>
-        <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-1">Setting Expectations</div>
+        <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-1">Setting Expectations</div>
         <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
           What &ldquo;AI&rdquo; Should Mean in Your World
         </h2>
@@ -138,7 +138,7 @@ export default function AIGuidePage() {
       </Section>
 
       <Section narrow>
-        <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-1">For Non-Technical Leaders</div>
+        <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-1">For Non-Technical Leaders</div>
         <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
           You Don&apos;t Need to Speak &ldquo;AI&rdquo; to Ask Good Questions
         </h2>
@@ -156,7 +156,7 @@ export default function AIGuidePage() {
 
       {/* DID YOU KNOW */}
       <Section id="did-you-know" narrow>
-        <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-1">Did You Know?</div>
+        <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-1">Did You Know?</div>
         <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
           Sticky Facts About AI People Rarely Tell You
         </h2>
@@ -177,7 +177,7 @@ export default function AIGuidePage() {
               key={i}
               className="bg-[rgba(10,31,68,0.9)] rounded-[14px] border border-white/18 p-4 shadow-[0_14px_32px_rgba(0,0,0,0.55)] text-sm text-[#dde6ff]"
             >
-              <strong className="text-gold-pale">{d.bold}</strong>
+              <strong className="text-cyan">{d.bold}</strong>
               <br />
               {d.text}
             </div>
@@ -188,13 +188,13 @@ export default function AIGuidePage() {
       {/* CONTACT */}
       <Section id="contact" className="bg-navy">
         <Card>
-          <div className="font-extrabold tracking-[.12em] uppercase text-xs text-eyebrow">Contact</div>
+          <div className="font-extrabold tracking-[.12em] uppercase text-xs text-cyan/60">Contact</div>
           <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
             Talk to a Team That Welcomes Hard Questions
           </h2>
           <p className="text-muted max-w-[65ch]">
             Encore Services, LLC · 9500 Medical Center Drive, Suite 300, Largo, MD 20774 · 202-460-8668 ·{" "}
-            <a href="mailto:jwoodson@encoresvcsllc.com" className="text-gold-pale underline">jwoodson@encoresvcsllc.com</a>
+            <a href="mailto:jwoodson@encoresvcsllc.com" className="text-cyan underline">jwoodson@encoresvcsllc.com</a>
           </p>
           <p className="text-muted max-w-[65ch] text-sm mt-2">
             Want access to the Gov AI Buyer&apos;s Guide? Use the form and ask for the access code.

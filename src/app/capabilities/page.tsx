@@ -25,23 +25,23 @@ export default function CapabilitiesPage() {
             <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
               Capabilities Statement
             </h2>
-            <p className="text-[#e4e9ff] text-[15px] leading-[1.7]">
+            <p className="text-muted text-[15px] leading-[1.7]">
               <strong>Encore Services, LLC</strong> is a <strong>Service-Disabled Veteran Owned Small Business (SDVOSB)</strong>{" "}
               headquartered in <strong>Largo, Maryland</strong>, specializing in administrative, management, technical,
               scientific, and information technology support services for government and commercial clients nationwide.
             </p>
-            <p className="text-[#e4e9ff] text-[15px] leading-[1.7]">
+            <p className="text-muted text-[15px] leading-[1.7]">
               Our growth is fueled by a commitment to <strong>innovation, operational excellence, and technology-driven
               mission support</strong>. We blend proven government contracting experience with modern engineering practices
               to deliver secure, scalable, and cost-effective solutions.
             </p>
-            <p className="text-[#e4e9ff] text-[15px] leading-[1.7]">
+            <p className="text-muted text-[15px] leading-[1.7]">
               We equip our professionals with advanced tools, real-time data systems, and modern engineering methodologies,
               enabling consistent delivery of superior quality, efficiency, and customer-focused outcomes. Encore&apos;s teams
               apply disciplined project and program management, responsive communication, and a culture of accountability
               from kickoff through contract closeout.
             </p>
-            <p className="text-[#e4e9ff] text-[15px] leading-[1.7]">
+            <p className="text-muted text-[15px] leading-[1.7]">
               As a capabilities partner, Encore brings <strong>right-the-first-time performance</strong>—creating efficiencies,
               reducing risk, and establishing repeatable practices that strengthen your mission over the long term.
             </p>
@@ -49,8 +49,8 @@ export default function CapabilitiesPage() {
 
           {/* Corporate Profile sidebar */}
           <Card>
-            <div className="font-extrabold tracking-[.12em] uppercase text-xs text-eyebrow">Corporate Profile</div>
-            <p className="text-[#f3f4ff] text-[15px] mt-2.5">
+            <div className="font-extrabold tracking-[.12em] uppercase text-xs text-cyan/60">Corporate Profile</div>
+            <p className="text-muted text-[15px] mt-2.5">
               Key identifiers and certifications that make Encore a trusted partner across Federal, State, and commercial engagements.
             </p>
             <div className="grid grid-cols-2 gap-3 mt-3.5">
@@ -61,12 +61,12 @@ export default function CapabilitiesPage() {
                 { label: "GSA Schedule 70", value: "47QTCA18D00BX" },
               ].map((s) => (
                 <div key={s.label}>
-                  <div className="text-[11px] uppercase tracking-[.12em] text-eyebrow mb-0.5">{s.label}</div>
+                  <div className="text-[11px] uppercase tracking-[.12em] text-cyan/60 mb-0.5">{s.label}</div>
                   <div className="font-bold text-[15px]">{s.value}</div>
                 </div>
               ))}
             </div>
-            <h3 className="text-sm uppercase tracking-[.16em] text-eyebrow mt-4 mb-1">Certifications</h3>
+            <h3 className="text-sm uppercase tracking-[.16em] text-cyan/60 mt-4 mb-1">Certifications</h3>
             <ul className="text-muted list-disc pl-4 text-[13px]">
               <li>Service-Disabled Veteran-Owned Small Business (SDVOSB)</li>
               <li>Veteran Owned Small Business (VOSB)</li>
@@ -74,7 +74,7 @@ export default function CapabilitiesPage() {
               <li>Minority Business Enterprise (MBE)</li>
               <li>CBSB &amp; SBR</li>
             </ul>
-            <h3 className="text-sm uppercase tracking-[.16em] text-eyebrow mt-4 mb-1">Set-Asides &amp; Vehicles</h3>
+            <h3 className="text-sm uppercase tracking-[.16em] text-cyan/60 mt-4 mb-1">Set-Asides &amp; Vehicles</h3>
             <ul className="text-muted list-disc pl-4 text-[13px]">
               <li>T4 Next Gen (subcontractor)</li>
               <li>GSA Schedule 70</li>
@@ -119,7 +119,7 @@ export default function CapabilitiesPage() {
           professional services, and human capital requirements across the enterprise.
         </p>
         <Card className="mt-4">
-          <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-2">Primary NAICS Codes</div>
+          <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-2">Primary NAICS Codes</div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 text-muted text-[13px]">
             {["518210","541611","541519","519190","541513","541511","541512","561499","541990","541612","561110","541690","541618","541219"].map((c) => (
               <div key={c}>{c}</div>
@@ -219,8 +219,8 @@ export default function CapabilitiesPage() {
       {/* PRIMARY CONTACT */}
       <Section>
         <Card className="max-w-[880px] mx-auto">
-          <div className="text-sm uppercase tracking-[.16em] text-eyebrow mb-1">Primary Point of Contact</div>
-          <div className="text-sm uppercase tracking-[.12em] text-gold-light mb-1">President &amp; Chief Executive Officer</div>
+          <div className="text-sm uppercase tracking-[.16em] text-cyan/60 mb-1">Primary Point of Contact</div>
+          <div className="text-sm uppercase tracking-[.12em] text-cyan mb-1">President &amp; Chief Executive Officer</div>
           <div className="text-lg font-extrabold mb-1.5">Jeffrey A. Woodson</div>
           <div className="text-[13px] text-muted mb-2.5">
             Encore Services, LLC<br />
@@ -229,7 +229,7 @@ export default function CapabilitiesPage() {
           </div>
           <p className="text-muted text-sm">
             Business Telephone: 202-460-8668<br />
-            E-mail: <a href="mailto:jwoodson@encoresvcsllc.com" className="text-gold-pale underline">jwoodson@encoresvcsllc.com</a>
+            E-mail: <a href="mailto:jwoodson@encoresvcsllc.com" className="text-cyan underline">jwoodson@encoresvcsllc.com</a>
           </p>
           <p className="text-muted text-[13px] mt-2 italic">
             Encore stands ready to support your next requirement with responsive teams, disciplined execution,
@@ -241,13 +241,13 @@ export default function CapabilitiesPage() {
       {/* CONTACT */}
       <Section id="contact" className="bg-navy">
         <Card>
-          <div className="font-extrabold tracking-[.12em] uppercase text-xs text-eyebrow">Contact</div>
+          <div className="font-extrabold tracking-[.12em] uppercase text-xs text-cyan/60">Contact</div>
           <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
             Turn Ideas into Partnerships
           </h2>
           <p className="text-muted max-w-[65ch]">
             Encore Services, LLC · 9500 Medical Center Drive, Suite 300, Largo, MD 20774 · 202-460-8668 ·{" "}
-            <a href="mailto:jwoodson@encoresvcsllc.com" className="text-gold-pale underline">jwoodson@encoresvcsllc.com</a>
+            <a href="mailto:jwoodson@encoresvcsllc.com" className="text-cyan underline">jwoodson@encoresvcsllc.com</a>
           </p>
         </Card>
       </Section>

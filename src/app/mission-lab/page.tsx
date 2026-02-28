@@ -589,7 +589,7 @@ export default function MissionLabPage() {
                 />
 
                 {/* Gate CTA */}
-                <div className="mt-6 bg-gradient-to-r from-[#0a1530] to-[#0d1a3a] border border-amber/20 rounded-xl p-6 text-center">
+                <div className="mt-6 bg-gradient-to-r from-[#0a1530] to-[#0d1a3a] border border-cyan/20 rounded-xl p-6 text-center">
                   <p className="text-sm text-[#c8d4f0] mb-3">
                     This process analysis was built by Encore&apos;s AI from your conversation.
                     <br />
@@ -669,7 +669,7 @@ export default function MissionLabPage() {
                 </div>
 
                 {/* Conversion footer */}
-                <div className="bg-gradient-to-r from-[#0a1530] to-[#0d1a3a] border border-amber/20 rounded-xl p-6">
+                <div className="bg-gradient-to-r from-[#0a1530] to-[#0d1a3a] border border-cyan/20 rounded-xl p-6">
                   <div className="flex flex-wrap gap-3">
                     <button
                       onClick={() => setShowAccountModal(true)}
