@@ -43,7 +43,7 @@ export default function BlogPage() {
         <section className="pt-32 pb-16 px-6">
           <div className="max-w-4xl mx-auto">
             <p className="text-eyebrow text-sm font-semibold tracking-widest uppercase mb-3">Insights & Updates</p>
-            <h1 className="text-4xl md:text-5xl font-heading gold-gradient-text mb-4">Blog</h1>
+            <h1 className="text-4xl md:text-5xl font-heading gold-gradient-text mb-4 pb-2">Blog</h1>
             <p className="text-muted text-lg leading-relaxed">
               Veteran-owned technology insights, federal contracting expertise, and AI innovation.
             </p>
