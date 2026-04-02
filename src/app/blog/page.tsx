@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Blog — Encore Services",
@@ -41,7 +39,6 @@ const posts = [
 export default function BlogPage() {
   return (
     <>
-      <Navbar />
       <main className="min-h-screen bg-navy-deep">
         <section className="pt-32 pb-16 px-6">
           <div className="max-w-4xl mx-auto">
@@ -81,7 +78,6 @@ export default function BlogPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 }
