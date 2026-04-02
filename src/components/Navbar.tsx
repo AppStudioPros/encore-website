@@ -10,6 +10,7 @@ const links = [
   { href: "/#solutions", label: "Solutions" },
   { href: "/mission-lab", label: "AI Mission Lab" },
   { href: "/programs", label: "Programs" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export default function Navbar() {
