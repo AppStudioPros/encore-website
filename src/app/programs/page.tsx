@@ -65,15 +65,7 @@ const programs = [
       "The Encore Contract Writing Suite supports federal contracting officers and acquisition teams in drafting, reviewing, and refining contract documents. Built around federal acquisition regulation requirements and aligned to VA Contract Writing System procurement standards. ECWS applies AI assistance to the specific language patterns, clause requirements, and review workflows that define federal contract writing -- not generic document generation.",
     logo: null,
   },
-  {
-    name: "LedgerLocc",
-    full: "Secure Ledger Technology for Federal Missions",
-    status: "Briefing Only" as const,
-    tagline: "Tamper-evident ledger infrastructure for government and critical-infrastructure environments.",
-    description:
-      "LedgerLocc provides secure distributed ledger capabilities for federal agencies and critical infrastructure operators that require immutable audit trails, tamper-evident records, and verifiable chain-of-custody documentation. Built for environments where the integrity of the record is as important as the record itself. Mission-specific design and architecture are discussed only in direct briefings with the Encore team.",
-    logo: "https://encoresvcsllc.com/wp-content/uploads/2025/12/LLbluewhite.png",
-  },
+
   {
     name: "Phylaxone",
     full: "Distributed Post-Quantum Authentication Protocol",
