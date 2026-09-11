@@ -75,15 +75,7 @@ const programs = [
       "Phylaxone is the distributed authentication protocol powering Encore's AI governance and identity infrastructure. FROST threshold signing across independent nodes -- no stored secrets, no single point of compromise. Native AI agent governance: every agent gets a cryptographic identity, scoped credentials, and a threshold human approval gate for high-risk actions. Post-quantum compliant for CMMC, FedRAMP, and NSS acquisition requirements. Architecture and deployment details are discussed in direct briefings.",
     logo: "https://encoresvcsllc.com/wp-content/uploads/2025/12/PHYLAX-ONE-scaled.png",
   },
-  {
-    name: "CypherMission",
-    full: "Emerging Encore Program",
-    status: "In Development" as const,
-    tagline: "Emerging Encore program in active development.",
-    description:
-      "CypherMission is in active development. Objectives, design, and operating concepts are available to authorized parties through direct briefing. Contact the Encore team to express interest and be included in early access conversations.",
-    logo: null,
-  },
+
 ];
 
 export default function ProgramsPage() {
