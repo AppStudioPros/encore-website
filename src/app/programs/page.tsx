@@ -1,208 +1,148 @@
-import Hero from "@/components/Hero";
-import Section from "@/components/Section";
-import Card from "@/components/Card";
-import ButtonPrimary from "@/components/ButtonPrimary";
-
-/* ── Status badge ── */
-function StatusBadge({ status }: { status: "Live" | "In Development" | "Briefing Only" }) {
-  const colors: Record<string, string> = {
-    Live: "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30",
-    "In Development": "bg-amber-500/15 text-amber-400 border border-amber-500/30",
-    "Briefing Only": "bg-cyan/10 text-cyan/70 border border-cyan/20",
-  };
-  return (
-    <span className={`inline-block text-[10px] font-bold tracking-[.15em] uppercase px-2.5 py-1 rounded-full ${colors[status]}`}>
-      {status}
-    </span>
-  );
-}
-
-/* ── Program data ── */
-const featured = {
-  name: "EFAIRA",
-  full: "Encore Federal AI Readiness Audit",
-  status: "Live" as const,
-  tagline: "The only independent federal AI readiness certification backed by cryptographic proof.",
-  description:
-    "A 30-point assessment across 8 evaluation domains of contractor and subcontractor AI and software readiness for federal agency awards. EFAIRA produces a color-coded scorecard and a signed, hash-verifiable Readiness Receipt that can be cited directly in technical volumes and proposal submissions. Assessed organizations receive the only AI readiness credential in the federal market that is independently verifiable -- not just an auditor's opinion.",
-  logo: null,
-};
+import Link from "next/link";
+import ScrollReveal from "@/components/ScrollReveal";
+import ProgramCards from "@/components/ProgramCards";
 
 const programs = [
   {
-    name: "EADIE",
-    full: "Encore Acquisition Decision Intelligence Engine",
-    status: "Live" as const,
-    tagline: "The contractor evaluation engine senior federal COs wish they had time to build themselves.",
-    description:
-      "EADIE encodes the multi-dimensional contractor evaluation methodologies that experienced Contracting Officers already apply manually, runs them at scale with AI augmentation, and produces audit-grade decision trails that survive protest review. Every assessment is sourced, logged, and explainable. EADIE does not replace human judgment -- it gives the CO more defensible evidence to back the judgment they were already going to make.",
-    logo: null,
-  },
-  {
-    name: "Acumen-10",
-    full: "Provable AI for Federal Missions",
-    status: "Live" as const,
-    tagline: "Ten governed processes. Every decision sourced, logged, and explainable.",
-    description:
-      "Acumen-10 is Encore's core AI governance framework for federal mission systems. Ten structured processes sit behind every decision the system makes. It corrects its own reasoning when evidence conflicts, flags uncertainty rather than fabricating confidence, and routes decisions that carry mission risk to a human approver. Every output is traceable to source. Deployed in federal environments where explainability is not optional.",
-    logo: null,
-  },
-  {
-    name: "AcuSightPro",
-    full: "Construction and Project Intelligence",
-    status: "In Development" as const,
-    tagline: "AI-powered construction site intelligence for federal and critical infrastructure projects.",
-    description:
-      "AcuSightPro applies AI to construction site documentation, compliance monitoring, and defect detection. Built for federal construction programs and critical infrastructure operators where documentation requirements are strict and the cost of missed defects is high. The system learns site-specific patterns over time -- flagging anomalies that static checklists miss. Built on ACI, the same compound intelligence substrate powering every Encore platform.",
-    logo: "https://encoresvcsllc.com/wp-content/uploads/2025/12/color-scaled.png",
-  },
-  {
-    name: "ECWS",
-    full: "Encore Contract Writing Suite",
-    status: "In Development" as const,
-    tagline: "AI-assisted contract writing aligned to federal acquisition standards.",
-    description:
-      "The Encore Contract Writing Suite supports federal contracting officers and acquisition teams in drafting, reviewing, and refining contract documents. Built around federal acquisition regulation requirements and aligned to VA Contract Writing System procurement standards. ECWS applies AI assistance to the specific language patterns, clause requirements, and review workflows that define federal contract writing -- not generic document generation.",
-    logo: null,
-  },
-
-  {
-    name: "Phylaxone",
-    full: "Distributed Post-Quantum Authentication Protocol",
-    status: "Briefing Only" as const,
-    tagline: "Cryptographic identity infrastructure for federal AI systems and zero trust environments.",
-    description:
-      "Phylaxone is the distributed authentication protocol powering Encore's AI governance and identity infrastructure. FROST threshold signing across independent nodes -- no stored secrets, no single point of compromise. Native AI agent governance: every agent gets a cryptographic identity, scoped credentials, and a threshold human approval gate for high-risk actions. Post-quantum compliant for CMMC, FedRAMP, and NSS acquisition requirements. Architecture and deployment details are discussed in direct briefings.",
-    logo: "https://encoresvcsllc.com/wp-content/uploads/2025/12/PHYLAX-ONE-scaled.png",
-  },
-
+    name: "AI & Software Readiness Audit",
+    status: "Federal AI Readiness Assessment (EFAIRA)",
+    tagline: "An independent 30-point assessment across 8 evaluation domains of contractor and subcontractor AI and software readiness for federal agency awards.",
+    body:
+      "The Encore Federal AI Readiness Audit (EFAIRA) is an independent assessment of contractor and subcontractor software, AI, and codebase posture in pursuit of federal agency awards. Color-coded scorecard across 8 evaluation domains. Signed hash-verifiable Readiness Receipt for citation in technical volumes. Mutual NDA at intake.",
+    available: true,
+    href: "/readiness-audit",
+    motion: "sweep",
+    featured: true,
+  }
 ];
+
+export const metadata = {
+  title: "Programs | Encore Services, LLC",
+  description:
+    "Secure AI Mission Vault: a catalog of the AI copilots, oversight engines, and secure platforms Encore is building for government, regulators, and critical-infrastructure missions.",
+};
 
 export default function ProgramsPage() {
   return (
     <>
-      <Hero
-        eyebrow="Secure AI Mission Vault"
-        title="Mission-Ready AI Systems and Smart Tech."
-        description="A single-source view of the AI platforms, oversight engines, and secure infrastructure Encore is building for government, regulators, and critical-infrastructure missions. Program details and architecture are discussed only in direct briefings."
-        videoSrc="https://encoresvcsllc.com/wp-content/uploads/2025/12/cyber-security-technology-fraud-prevention-and-pri-2025-12-09-04-49-17-utc.mov"
-      />
-
-      {/* ── Featured: EFAIRA ── */}
-      <Section id="efaira">
-        <div className="font-extrabold tracking-[.12em] uppercase text-xs text-cyan/60 mb-2">Featured Program</div>
-        <Card className="flex flex-col gap-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <StatusBadge status={featured.status} />
-            <span className="text-[11px] text-muted/50 font-mono tracking-wide">{featured.full}</span>
-          </div>
-          <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(22px,2.8vw,32px)]">
-            {featured.name}
-          </h2>
-          <p className="text-cyan/80 font-semibold text-sm">{featured.tagline}</p>
-          <p className="text-muted text-sm leading-[1.75] max-w-[75ch]">{featured.description}</p>
-          <div className="flex flex-wrap gap-3 mt-2">
-            <ButtonPrimary href="#vault-request">Request EFAIRA Assessment</ButtonPrimary>
-          </div>
-        </Card>
-      </Section>
-
-      {/* ── All Programs ── */}
-      <Section id="vault-programs">
-        <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
-          Programs and Capabilities
-        </h2>
-        <p className="text-muted max-w-[70ch] mt-1.5">
-          Names and branding are shown here for awareness. Program details, architecture, and use cases are
-          discussed only in direct briefings with Encore.
-        </p>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 mt-6">
-          {programs.map((p) => (
-            <Card key={p.name} className="flex flex-col gap-3.5 h-full">
-              <header className="flex gap-4 items-start">
-                {p.logo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={p.logo}
-                    alt={`${p.name} logo`}
-                    className="w-[130px] h-14 rounded-xl bg-white/80 object-contain border border-white/35 shrink-0"
-                  />
-                ) : (
-                  <div className="w-[130px] h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-bold text-cyan/40 uppercase tracking-[.12em] shrink-0">
-                    {p.name}
-                  </div>
-                )}
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <StatusBadge status={p.status} />
-                  </div>
-                  <h3 className="text-lg font-bold leading-tight">{p.name}</h3>
-                  <p className="text-[11px] text-muted/50 font-mono">{p.full}</p>
-                </div>
-              </header>
-              <p className="text-cyan/70 text-xs font-semibold">{p.tagline}</p>
-              <p className="text-muted text-sm leading-[1.7] flex-1">{p.description}</p>
-              <div className="mt-auto">
-                <ButtonPrimary href="#vault-request">Request a Briefing</ButtonPrimary>
-              </div>
-            </Card>
-          ))}
+      {/* ═══════════════════ HERO ═══════════════════ */}
+      <section className="relative min-h-[60vh] flex items-center overflow-hidden" style={{ paddingTop: "120px", paddingBottom: "60px" }}>
+        <div className="hero-video-wrap hero-video-desktop">
+          <video autoPlay loop muted playsInline preload="none">
+            <source src="/videos/programshero.mp4" type="video/mp4" />
+          </video>
+          <div className="hero-video-overlay" />
         </div>
-      </Section>
+        <div className="container-page relative z-10">
+          <ScrollReveal className="reveal max-w-3xl">
+            <div className="eyebrow mb-5 flex items-center gap-3">
+              <span>Secure AI Mission Vault</span>
+              <span className="h-px w-12" style={{ background: "var(--amber)" }} />
+            </div>
+            <h1 className="heading-xl text-balance mb-6">
+              Mission-Ready <span className="accent">AI Systems</span> &amp; Smart Tech.
+            </h1>
+            <p className="text-lg md:text-xl text-white/85 leading-relaxed mb-10 max-w-2xl text-balance">
+              A single-source view of the <strong>AI copilots</strong>, <strong>oversight engines</strong>, and{" "}
+              <strong>secure platforms</strong> Encore is building for government, regulators, and critical-infrastructure
+              missions. Names and branding are shown here for awareness; program details, architecture, and use cases
+              are discussed only in direct briefings.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/contact" className="btn btn-primary">
+                Request a Briefing
+              </Link>
+              <Link href="/capabilities" className="btn btn-outline">
+                View Capabilities
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
 
-      {/* ── ACI Foundation callout ── */}
-      <Section>
-        <Card className="text-center max-w-[700px] mx-auto">
-          <div className="font-extrabold tracking-[.12em] uppercase text-xs text-cyan/60 mb-3">Intelligence Substrate</div>
-          <h3 className="font-heading font-extrabold text-[clamp(18px,2.2vw,24px)] mb-3">
-            Every Encore Program Runs on ACI
-          </h3>
-          <p className="text-muted text-sm leading-[1.75] mb-4">
-            Adaptive Compound Intelligence is the patented intelligence framework powering every platform
-            Encore ships. Each deployment compounds value into the shared intelligence layer -- the system
-            gets measurably more capable over time, not just more data-heavy. ACI founding work was reviewed
-            by Oxford University faculty as "a fundamentally new category of intelligence architecture."
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 text-xs text-muted/60">
-            <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">US Patent Issued</span>
-            <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">Application 19/680,696</span>
-            <span className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10">Inventor: Corey Strange, CAIO/CTO</span>
-          </div>
-          <div className="mt-4">
-            <a
-              href="https://www.adaptivecompoundintelligence.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-cyan text-sm hover:underline"
-            >
-              adaptivecompoundintelligence.com
-            </a>
-          </div>
-        </Card>
-      </Section>
-
-      {/* ── Request briefing ── */}
-      <Section id="vault-request">
-        <div className="max-w-[900px] mx-auto">
-          <Card>
-            <div className="font-extrabold tracking-[.12em] uppercase text-xs text-cyan/60">Contact</div>
-            <h2 className="font-heading font-extrabold leading-[1.15] text-[clamp(26px,3.2vw,40px)]">
-              Request a Confidential Briefing.
+      {/* ═══════════════════ INTRO ═══════════════════ */}
+      <section>
+        <div className="container-page">
+          <ScrollReveal className="reveal text-center max-w-3xl mx-auto">
+            <div className="eyebrow mb-4">Programs &amp; Capabilities</div>
+            <h2 className="heading-lg mb-5 text-balance">
+              Purpose-Built <span className="accent">AI Programs</span> for Mission-Critical Environments.
             </h2>
-            <p className="text-muted max-w-[65ch] mt-1.5">
-              To learn more about any Encore program, contact us and include the program name and any relevant
-              mission or organizational context. All program details are shared under mutual NDA.
+            <p className="text-muted text-lg">
+              Each Encore program is engineered for the realities of federal and critical-infrastructure work: secure,
+              explainable, and designed around mission outcomes, not demo tricks.
             </p>
-            <p className="text-muted text-sm mt-3">
-              Email:{" "}
-              <a href="mailto:jwoodson@encoresvcsllc.com" className="text-cyan underline">
-                jwoodson@encoresvcsllc.com
-              </a>{" "}
-              · Phone: (202) 460-8668
-            </p>
-          </Card>
+          </ScrollReveal>
         </div>
-      </Section>
+      </section>
+
+      {/* ═══════════════════ CONFIDENTIAL AI BOX ═══════════════════ */}
+      <section style={{ paddingTop: "48px", paddingBottom: "16px" }}>
+        <div className="container-page">
+          <ScrollReveal className="reveal-scale card-patriotic max-w-4xl mx-auto text-center">
+            <div className="card-inner py-10 px-8">
+              <div className="eyebrow mb-4">For Government Agencies</div>
+              <h2 className="heading-md mb-4 text-balance">
+                Confidential AI &amp; <span className="accent">Software Details</span>
+              </h2>
+              <p className="text-muted text-base leading-relaxed mb-4 max-w-2xl mx-auto">
+                Detailed program information, platform architecture, and AI system documentation are available to
+                authorized government agency personnel only. If you have access, enter the secure area below. If
+                you are with a federal agency and would like same-day access, contact Encore and we will get you in.
+              </p>
+              {/* Program name list */}
+              <p className="text-sm font-semibold mb-6" style={{ color: "rgba(255,255,255,0.45)" }}>
+                AcuSightPro &nbsp;·&nbsp; Encore Contract Writing Suite &nbsp;·&nbsp; EADIE &nbsp;·&nbsp; Acumen-10 &nbsp;·&nbsp; Financial Integration Systems
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <Link href="/contact" className="btn btn-primary">
+                  Contact Encore
+                </Link>
+                <Link href="/secure" className="btn btn-outline">
+                  Enter Secure Area
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ═══════════════════ PUBLIC PROGRAM CARDS ═══════════════════ */}
+      <section style={{ paddingTop: "48px" }}>
+        <div className="container-page">
+          <ProgramCards programs={programs} />
+        </div>
+      </section>
+
+      {/* ═══════════════════ FINAL CTA ═══════════════════ */}
+      <section className="relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-30"
+          style={{ background: "radial-gradient(circle at 50% 50%, rgba(255, 176, 0, 0.3), transparent 60%)" }}
+        />
+        <div className="container-page relative z-10">
+          <ScrollReveal className="reveal-scale card-patriotic cta-final max-w-4xl mx-auto text-center">
+            <div className="card-inner py-12 px-8">
+              <div className="eyebrow mb-4">Start the Conversation</div>
+              <h2 className="heading-lg mb-5 text-balance">
+                Have a Mission That Needs <span className="accent">AI?</span>
+              </h2>
+              <p className="text-muted text-lg mb-8 max-w-2xl mx-auto">
+                Tell us about your challenge. We&rsquo;ll tell you honestly whether an existing program fits, or whether
+                something custom is the right answer.
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <Link href="/contact" className="btn btn-primary">
+                  Contact Encore
+                </Link>
+                <Link href="/services" className="btn btn-outline">
+                  View Services
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
     </>
   );
 }
